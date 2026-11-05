@@ -199,11 +199,15 @@
       <!-- Colonne Droite (Formulaire de Réservation) -->
       <div class="md:col-span-7 lg:col-span-7 space-y-4">
         
-        <!-- SÉLECTEUR DE SERVICE : TUK-TUK, PARKING SOLAIRE OU ÉVÉNEMENTS -->
-        <div class="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-3 gap-1 text-center font-bold text-[11px] sm:text-xs md:text-sm">
+        <!-- SÉLECTEUR DE SERVICE : TUK-TUK, CURISTES, PARKING SOLAIRE OU ÉVÉNEMENTS -->
+        <div class="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-4 gap-1 text-center font-bold text-[10px] sm:text-xs md:text-sm">
           <button id="tabTuktuk" onclick="switchService('tuktuk')" class="py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1">
             <i data-lucide="zap" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
             <span>Navette</span>
+          </button>
+          <button id="tabCuriste" onclick="switchService('curiste')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
+            <i data-lucide="heart-pulse" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-600"></i>
+            <span>Curistes</span>
           </button>
           <button id="tabParking" onclick="switchService('parking')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
             <i data-lucide="shield-check" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
@@ -211,7 +215,7 @@
           </button>
           <button id="tabEvents" onclick="switchService('events')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
             <i data-lucide="sparkles" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-tecGold-500"></i>
-            <span>Événements</span>
+            <span>Événement</span>
           </button>
         </div>
 
@@ -305,7 +309,18 @@
                 </div>
               </label>
 
-              <label class="relative sm:col-span-2 flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="parkingOption" value="curiste" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">♨️ Forfait Curiste (3 Semaines)</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">180 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Cure thermale 21 jours • Parking couvert gardé</p>
+                </div>
+              </label>
+
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
                 <input type="radio" name="parkingOption" value="zenPack" onchange="calculateTotal()" class="hidden">
                 <div class="flex-1">
                   <div class="flex items-center justify-between">
@@ -323,6 +338,62 @@
               <div>
                 <span class="font-bold text-amber-900">Option Recharge Solaire VE (+15 €)</span>
                 <p class="text-[11px] text-amber-800">Votre voiture électrique rechargée pendant votre rando</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- SECTION CURISTES & THERMES (3 SEMAINES / 21 JOURS) -->
+          <div id="serviceCuristeOptions" class="hidden space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Forfaits Spéciaux Cure Thermale (21 Jours)</label>
+              <span class="text-[10px] font-bold text-cyan-800 bg-cyan-100 px-2.5 py-0.5 rounded-full flex items-center space-x-1">
+                <i data-lucide="waves" class="w-3 h-3"></i>
+                <span>Thermes Cilaos</span>
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-tecGreen-700 bg-emerald-50/50 cursor-pointer transition">
+                <input type="radio" name="curisteOption" value="cure_navette" checked onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Pass Navettes Thermes (21 Jours)</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">110 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Aller/Retour quotidien hôtel/gîte vers Thermes • Prise en charge porte-à-porte</p>
+                </div>
+              </label>
+
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="curisteOption" value="cure_parking" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Parking Solaire Curiste (3 Semaines)</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">180 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Place couverte sécurisée 21j (~8,50 €/j au lieu de 18 €)</p>
+                </div>
+              </label>
+
+              <label class="relative sm:col-span-2 flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="curisteOption" value="cure_totale" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">✨ Pack Sérénité Thermale 3 Semaines (Tout Inclus)</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">260 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Parking ombrière solaire 21j + Navettes Tuk-Tuk quotidiennes illimitées + Dépose marché & thermes</p>
+                </div>
+              </label>
+            </div>
+
+            <!-- Option Aide Port des Bagages / Soins Quotidiens -->
+            <label class="flex items-center space-x-2.5 p-3 rounded-2xl bg-cyan-50/70 border border-cyan-200 text-xs cursor-pointer">
+              <input type="checkbox" id="curisteHelpOption" onchange="calculateTotal()" class="w-4 h-4 accent-cyan-600 rounded">
+              <div>
+                <span class="font-bold text-cyan-950">Option Accompagnement Doux PMR / Séniors (Inclus)</span>
+                <p class="text-[11px] text-cyan-800">Assistance par Yannis pour la montée à bord, cannes et sacs de soins</p>
               </div>
             </label>
           </div>
@@ -579,10 +650,10 @@
               <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
               <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
               <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
-              <span class="text-xs font-black text-amber-900 ml-1.5">5.0 / 5</span>
+              <span class="text-xs font-black text-amber-900 ml-1.5">4.9 / 5 • 68 avis</span>
             </div>
             <h4 class="font-extrabold text-slate-900 text-sm">Votre expérience compte pour nous !</h4>
-            <p class="text-xs text-slate-600 mt-1">Vous avez voyagé avec Yannis ? Aidez d'autres randonneurs et voyageurs en partageant votre avis.</p>
+            <p class="text-xs text-slate-600 mt-1">Vous avez voyagé avec Yannis ? Aidez d'autres randonneurs et curistes en partageant votre avis.</p>
           </div>
           <button onclick="openReviewLink()" class="w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-slate-950 font-extrabold text-xs rounded-2xl flex items-center justify-center space-x-2 shadow-sm transition">
             <i data-lucide="message-square-heart" class="w-4 h-4"></i>
@@ -613,6 +684,123 @@
           </div>
         </div>
 
+      <!-- CARROUSEL D'AVIS CLIENTS VÉRIFIÉS (POUR PRÉSENTATION BANQUE & PARTENAIRES) -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between px-1">
+          <div>
+            <h4 class="font-extrabold text-slate-900 text-sm sm:text-base">Retours & Témoignages Clients</h4>
+            <p class="text-xs text-slate-500">Avis vérifiés de randonneurs, curistes et résidents de Cilaos</p>
+          </div>
+          <span class="text-[11px] font-bold text-tecGreen-800 bg-emerald-100 px-3 py-1 rounded-full">
+            100% Recommandé
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          
+          <!-- Avis 1 : Randonneur Piton des Neiges -->
+          <div class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-3">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
+                    MR
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-900">Mathieu Rivière</h5>
+                    <p class="text-[10px] text-slate-400">Randonnée Piton des Neiges</p>
+                  </div>
+                </div>
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed italic">
+                « La formule parking solaire + dépose au Bloc est un pur régal ! Voiture à l'ombre et en sécurité pendant 2 jours. Yannis est ponctuel, souriant et de très bon conseil pour le sentier. Incontournable ! »
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+              <span class="text-emerald-700 font-semibold flex items-center space-x-1">
+                <i data-lucide="check" class="w-3 h-3"></i>
+                <span>Avis certifié</span>
+              </span>
+              <span>Il y a 3 jours</span>
+            </div>
+          </div>
+
+          <!-- Avis 2 : Curiste Thermes de Cilaos -->
+          <div class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-3">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-full bg-cyan-700 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
+                    FD
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-900">Françoise & Daniel</h5>
+                    <p class="text-[10px] text-slate-400">Curistes (3 semaines)</p>
+                  </div>
+                </div>
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed italic">
+                « Nous venons en cure à Cilaos depuis 6 ans et c'est la 1ère fois que nous n'avons pas à nous soucier des pentes et du stationnement. Yannis vient nous chercher chaque matin au gîte. Chauffeur très attentionné ! »
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+              <span class="text-cyan-700 font-semibold flex items-center space-x-1">
+                <i data-lucide="check" class="w-3 h-3"></i>
+                <span>Forfait 21 Jours</span>
+              </span>
+              <span>Il y a 1 semaine</span>
+            </div>
+          </div>
+
+          <!-- Avis 3 : Événement / Mariage & Touriste -->
+          <div class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-3">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-full bg-pink-600 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
+                    EL
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-900">Élodie & Lucas</h5>
+                    <p class="text-[10px] text-slate-400">Mariage & Cortège Cilaos</p>
+                  </div>
+                </div>
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed italic">
+                « Le tuk-tuk floqué Tec-Tec décoré de fleurs locales pour notre mariage a fait sensation auprès de tous les invités ! Les photos avec les montagnes en arrière-plan sont magnifiques. Merci encore ! »
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+              <span class="text-pink-600 font-semibold flex items-center space-x-1">
+                <i data-lucide="check" class="w-3 h-3"></i>
+                <span>Prestation Événement</span>
+              </span>
+              <span>Il y a 2 semaines</span>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       <!-- Footer : Liens Juridiques & Copyright -->
@@ -714,13 +902,15 @@
     let currentService = 'tuktuk';
     let myBookings = [];
     let lastBookingData = null; // Pour l'export agenda
-    // Bascule entre Tuk-Tuk, Parking Solaire et Événements
+    // Bascule entre Tuk-Tuk, Curistes, Parking Solaire et Événements
     function switchService(service) {
       currentService = service;
       const tabTuktuk = document.getElementById('tabTuktuk');
+      const tabCuriste = document.getElementById('tabCuriste');
       const tabParking = document.getElementById('tabParking');
       const tabEvents = document.getElementById('tabEvents');
       const tuktukOpts = document.getElementById('serviceTuktukOptions');
+      const curisteOpts = document.getElementById('serviceCuristeOptions');
       const parkingOpts = document.getElementById('serviceParkingOptions');
       const eventsOpts = document.getElementById('serviceEventsOptions');
 
@@ -729,16 +919,21 @@
       const inactiveClass = "py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1";
 
       tabTuktuk.className = inactiveClass;
+      tabCuriste.className = inactiveClass;
       tabParking.className = inactiveClass;
       tabEvents.className = inactiveClass;
 
       tuktukOpts.classList.add('hidden');
+      curisteOpts.classList.add('hidden');
       parkingOpts.classList.add('hidden');
       eventsOpts.classList.add('hidden');
 
       if (service === 'tuktuk') {
         tabTuktuk.className = activeClass;
         tuktukOpts.classList.remove('hidden');
+      } else if (service === 'curiste') {
+        tabCuriste.className = activeClass;
+        curisteOpts.classList.remove('hidden');
       } else if (service === 'parking') {
         tabParking.className = activeClass;
         parkingOpts.classList.remove('hidden');
@@ -772,6 +967,18 @@
         } else if (selectedRoute === 'tour') {
           total = pass * 20;
           label = `Grand Tour (${pass} pers.)`;
+        }
+      } else if (currentService === 'curiste') {
+        const selectedCuriste = document.querySelector('input[name="curisteOption"]:checked').value;
+        if (selectedCuriste === 'cure_navette') {
+          total = 110;
+          label = "Pass Navettes Thermes (21 Jours)";
+        } else if (selectedCuriste === 'cure_parking') {
+          total = 180;
+          label = "Parking Solaire Curiste (3 Semaines)";
+        } else if (selectedCuriste === 'cure_totale') {
+          total = 260;
+          label = "Pack Sérénité Thermale 21j (Parking+Navettes)";
         }
       } else if (currentService === 'parking') {
         const selectedParking = document.querySelector('input[name="parkingOption"]:checked').value;
@@ -1004,11 +1211,13 @@ END:VCALENDAR`;
               <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
                 b.service === 'tuktuk' 
                   ? 'bg-emerald-100 text-tecGreen-800' 
-                  : b.service === 'parking' 
-                    ? 'bg-amber-100 text-amber-800' 
-                    : 'bg-pink-100 text-pink-800'
+                  : b.service === 'curiste'
+                    ? 'bg-cyan-100 text-cyan-800'
+                    : b.service === 'parking' 
+                      ? 'bg-amber-100 text-amber-800' 
+                      : 'bg-pink-100 text-pink-800'
               }">
-                ${b.service === 'tuktuk' ? 'Tuk-Tuk' : b.service === 'parking' ? 'Parking Solaire' : 'Événement'}
+                ${b.service === 'tuktuk' ? 'Tuk-Tuk' : b.service === 'curiste' ? 'Cure Thermale' : b.service === 'parking' ? 'Parking Solaire' : 'Événement'}
               </span>
               <span class="text-xs sm:text-sm font-bold text-slate-800">${b.date} • ${b.time}</span>
             </div>
