@@ -450,6 +450,107 @@
       </div>
     </section>
 
+    <!-- ========== NOUVELLE SECTION : CONTACT, ITINÉRAIRE, AVIS & RÉSEAUX ========== -->
+    <section class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
+      
+      <!-- Carte Contact & Itinéraire Google Maps -->
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <span class="inline-flex items-center space-x-1.5 bg-emerald-100 text-tecGreen-800 text-xs font-bold px-3 py-1 rounded-full">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+              <span>Hub Principal & Accueil Randonneurs</span>
+            </span>
+            <h3 class="font-extrabold text-slate-900 text-lg">Tec-Tec Tuk Tuk Cilaos</h3>
+            <p class="text-xs sm:text-sm text-slate-600">1 Route de Bras-Sec, 97413 Cilaos, La Réunion</p>
+            <div class="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-500">
+              <a href="tel:+262692000000" class="hover:text-tecGreen-700 font-semibold flex items-center space-x-1">
+                <i data-lucide="phone" class="w-3.5 h-3.5 text-tecGreen-600"></i>
+                <span>06 92 XX XX XX</span>
+              </a>
+              <span>•</span>
+              <a href="mailto:tec-tec@tuk-tuk.fr" class="hover:text-tecGreen-700 font-semibold flex items-center space-x-1">
+                <i data-lucide="mail" class="w-3.5 h-3.5 text-tecGreen-600"></i>
+                <span>tec-tec@tuk-tuk.fr</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Boutons Actions Rapides : Itinéraire Maps & Appel -->
+          <div class="flex flex-wrap sm:flex-nowrap gap-2">
+            <a href="https://www.google.com/maps/search/?api=1&query=1+Route+de+Bras-Sec+97413+Cilaos" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center space-x-2 transition shadow-sm">
+              <i data-lucide="navigation" class="w-4 h-4 text-tecGold-400"></i>
+              <span>Itinéraire Maps</span>
+            </a>
+            <a href="https://wa.me/262692000000?text=Bonjour%20Tec-Tec%20Tuk%20Tuk%20!" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center space-x-2 transition shadow-sm">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+              <span>WhatsApp Direct</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloc Réseaux Sociaux & Avis Google / TripAdvisor -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        <!-- Boîte Avis Clients -->
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50/60 rounded-3xl p-5 border border-amber-200/70 flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center space-x-1 text-amber-500 mb-1">
+              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              <span class="text-xs font-black text-amber-900 ml-1.5">5.0 / 5</span>
+            </div>
+            <h4 class="font-extrabold text-slate-900 text-sm">Votre expérience compte pour nous !</h4>
+            <p class="text-xs text-slate-600 mt-1">Vous avez voyagé avec Yannis ? Aidez d'autres randonneurs et voyageurs en partageant votre avis.</p>
+          </div>
+          <button onclick="openReviewLink()" class="w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-slate-950 font-extrabold text-xs rounded-2xl flex items-center justify-center space-x-2 shadow-sm transition">
+            <i data-lucide="message-square-heart" class="w-4 h-4"></i>
+            <span>Laisser un avis (Google Avis)</span>
+          </button>
+        </div>
+
+        <!-- Boîte Réseaux Sociaux -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 flex flex-col justify-between space-y-3">
+          <div>
+            <span class="text-[11px] font-bold text-tecGreen-700 uppercase tracking-wider">Suivez nos aventures</span>
+            <h4 class="font-extrabold text-slate-900 text-sm mt-0.5">Communauté & Actualités Cilaos</h4>
+            <p class="text-xs text-slate-500 mt-1">Retrouvez nos photos, l'état des sentiers et les actus du cirque au quotidien.</p>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1 transition">
+              <i data-lucide="instagram" class="w-4 h-4 text-pink-600"></i>
+              <span class="text-[11px]">Instagram</span>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1 transition">
+              <i data-lucide="facebook" class="w-4 h-4 text-blue-600"></i>
+              <span class="text-[11px]">Facebook</span>
+            </a>
+            <a href="https://tripadvisor.fr" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1 transition">
+              <i data-lucide="award" class="w-4 h-4 text-emerald-600"></i>
+              <span class="text-[11px]">Tripadvisor</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer : Liens Juridiques & Copyright -->
+      <footer class="pt-4 pb-2 text-center text-xs text-slate-400 space-y-2">
+        <div class="flex items-center justify-center space-x-3 text-slate-500 font-medium">
+          <button onclick="openLegalModal('mentions')" class="hover:text-tecGreen-700 underline underline-offset-4">Mentions Légales</button>
+          <span>•</span>
+          <button onclick="openLegalModal('privacy')" class="hover:text-tecGreen-700 underline underline-offset-4">Politique de Confidentialité</button>
+          <span>•</span>
+          <button onclick="openLegalModal('cgu')" class="hover:text-tecGreen-700 underline underline-offset-4">CGV / Transports</button>
+        </div>
+        <p class="text-[11px]">© 2026 Le Tec-Tec Tuk Tuk Cilaos. Mobilité éco-responsable & Parking Solaire.</p>
+      </footer>
+    </section>
+
   </main>
 
   <!-- ================= POPUP MODAL CONFIRMATION ================= -->
@@ -462,12 +563,47 @@
       <p class="text-xs sm:text-sm text-slate-500 leading-relaxed" id="modalSummary">
         Votre navette a bien été prise en compte.
       </p>
+      
+      <!-- Boutons d'Action : WhatsApp + Ajouter à l'Agenda -->
       <div class="pt-2 space-y-2">
         <a id="whatsappSendBtn" href="#" target="_blank" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md flex items-center justify-center space-x-2 transition">
           <i data-lucide="message-circle" class="w-4 h-4"></i>
           <span>Envoyer à Yannis (WhatsApp)</span>
         </a>
+
+        <!-- Bouton Ajout Calendrier -->
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="addToGoogleCalendar()" class="w-full py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold rounded-xl border border-blue-200 flex items-center justify-center space-x-1.5 transition">
+            <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+            <span>Google Agenda</span>
+          </button>
+          <button onclick="downloadICSFile()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 flex items-center justify-center space-x-1.5 transition">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>Apple / Outlook</span>
+          </button>
+        </div>
+
         <button onclick="closeModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold rounded-xl">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= POPUP MODAL MENTIONS LÉGALES & CONFIDENTIALITÉ ================= -->
+  <div id="legalModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-100">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 id="legalModalTitle" class="font-extrabold text-base text-slate-900">Mentions Légales</h3>
+        <button onclick="closeLegalModal()" class="p-1 rounded-full text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="legalModalBody" class="py-4 text-xs text-slate-600 leading-relaxed overflow-y-auto space-y-3">
+        <!-- Contenu injecté dynamiquement -->
+      </div>
+      <div class="pt-3 border-t border-slate-100">
+        <button onclick="closeLegalModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl">
           Fermer
         </button>
       </div>
@@ -500,6 +636,7 @@
   <script>
     let currentService = 'tuktuk';
     let myBookings = [];
+    let lastBookingData = null; // Pour l'export agenda
 
     // Date par défaut : Demain
     const tomorrow = new Date();
@@ -633,6 +770,7 @@
         service: currentService
       };
 
+      lastBookingData = newBooking;
       myBookings.unshift(newBooking);
       renderBookings();
 
@@ -650,7 +788,8 @@
         `• Téléphone : ${phone}\n` +
         `• Prestation : ${detail}\n` +
         `• Date/Heure : ${date} à ${time}\n` +
-        `• Montant : ${price}`
+        `• Montant : ${price}\n` +
+        `• Point de RDV : 1 Route de Bras-Sec, Cilaos`
       );
       document.getElementById('whatsappSendBtn').href = `https://wa.me/${phoneClean}?text=${waMsg}`;
 
@@ -660,6 +799,107 @@
       // Réinitialisation des coordonnées
       document.getElementById('clientName').value = '';
       document.getElementById('clientPhone').value = '';
+    }
+
+    // Ajout direct dans Google Calendar
+    function addToGoogleCalendar() {
+      if (!lastBookingData) return;
+      const b = lastBookingData;
+      const startTime = b.date.replace(/-/g, '') + 'T' + b.time.replace(':', '') + '00';
+      
+      // Fin estimée + 1 heure
+      const [h, m] = b.time.split(':').map(Number);
+      const endH = String((h + 1) % 24).padStart(2, '0');
+      const endTime = b.date.replace(/-/g, '') + 'T' + endH + String(m).padStart(2, '0') + '00';
+
+      const title = encodeURIComponent(`Tec-Tec Tuk Tuk : ${b.detail}`);
+      const details = encodeURIComponent(`Réservation pour ${b.name} (${b.phone})\nPrestation : ${b.detail}\nMontant : ${b.price}\nContact Yannis : 06 92 XX XX XX`);
+      const location = encodeURIComponent('1 Route de Bras-Sec, 97413 Cilaos, La Réunion');
+
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${details}&location=${location}`;
+      window.open(url, '_blank');
+    }
+
+    // Téléchargement fichier .ICS (Apple Calendar / Outlook / Téléphone)
+    function downloadICSFile() {
+      if (!lastBookingData) return;
+      const b = lastBookingData;
+      const startDateTime = b.date.replace(/-/g, '') + 'T' + b.time.replace(':', '') + '00';
+      const [h, m] = b.time.split(':').map(Number);
+      const endH = String((h + 1) % 24).padStart(2, '0');
+      const endDateTime = b.date.replace(/-/g, '') + 'T' + endH + String(m).padStart(2, '0') + '00';
+
+      const icsContent = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tec-Tec Tuk Tuk Cilaos//FR
+BEGIN:VEVENT
+UID:${b.id}@tec-tec-tuktuk.re
+DTSTAMP:${startDateTime}Z
+DTSTART:${startDateTime}
+DTEND:${endDateTime}
+SUMMARY:Tec-Tec Tuk Tuk : ${b.detail}
+DESCRIPTION:Réservation pour ${b.name} (${b.phone}) - Prestation : ${b.detail} - Montant : ${b.price} - Chauffeur Yannis
+LOCATION:1 Route de Bras-Sec, 97413 Cilaos, La Réunion
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', `reservation-tectec-${b.date}.ics`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Gestion du bouton Avis Google
+    function openReviewLink() {
+      // Lien direct fiche d'avis Google Maps / Google My Business
+      const googleReviewUrl = "https://search.google.com/local/writereview?placeid=ChIJe_acIHKdgiER8g90R0Adqr4";
+      window.open(googleReviewUrl, '_blank');
+    }
+
+    // Gestion Modale Mentions Légales & Confidentialité
+    function openLegalModal(type) {
+      const modal = document.getElementById('legalModal');
+      const title = document.getElementById('legalModalTitle');
+      const body = document.getElementById('legalModalBody');
+
+      if (type === 'mentions') {
+        title.innerText = "Mentions Légales";
+        body.innerHTML = `
+          <p><strong>Éditeur de l'application :</strong> Entreprise Tec-Tec Tuk Tuk</p>
+          <p><strong>Siège social & Hub :</strong> 1 Route de Bras-Sec, 97413 Cilaos, Île de La Réunion</p>
+          <p><strong>Email :</strong> tec-tec@tuk-tuk.fr | <strong>Téléphone :</strong> 06 92 XX XX XX</p>
+          <p><strong>Activité :</strong> Transport de voyageurs en véhicules de tourisme légers (L7e électriques) & gardiennage sécurisé de véhicules.</p>
+          <p><strong>Chauffeur référent :</strong> Yannis (Carte professionnelle et attestation de transport délivrée par la DREAL Réunion).</p>
+          <p><strong>Hébergement de l'application :</strong> GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).</p>
+        `;
+      } else if (type === 'privacy') {
+        title.innerText = "Politique de Confidentialité (RGPD)";
+        body.innerHTML = `
+          <p><strong>Collecte des données :</strong> Les seules données collectées lors de votre réservation sont votre nom, prénom, numéro de téléphone et informations de parcours.</p>
+          <p><strong>Finalité :</strong> Ces données servent exclusivement à la bonne organisation logistique de vos trajets avec Yannis et à la transmission par WhatsApp de votre bon de réservation.</p>
+          <p><strong>Conservation :</strong> Aucune donnée personnelle n'est vendue ni cédée à des tiers. Les réservations restent stockées localement sur votre appareil (PWA) pour votre historique personnel.</p>
+          <p><strong>Vos droits :</strong> Vous disposez d'un droit d'accès, de modification ou de suppression en écrivant à tec-tec@tuk-tuk.fr.</p>
+        `;
+      } else if (type === 'cgu') {
+        title.innerText = "Conditions de Transport & Gardiennage";
+        body.innerHTML = `
+          <p><strong>Réservations :</strong> Toute réservation effectuée via l'application est confirmée après validation par message WhatsApp avec notre chauffeur.</p>
+          <p><strong>Bagages :</strong> Les sacs de randonnée et équipements de trail sont admis gratuitement à bord des tuk-tuks dans la limite des places disponibles.</p>
+          <p><strong>Gardiennage sous Ombrière :</strong> Le parking solaire est placé sous vidéosurveillance 24h/24. Un état des lieux sommaire est effectué lors de la dépose des clés.</p>
+          <p><strong>Conditions météo :</strong> En cas d'intempéries majeures (alertes cycloniques météo France), les parcours montagne peuvent être adaptés pour votre sécurité.</p>
+        `;
+      }
+
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeLegalModal() {
+      document.getElementById('legalModal').classList.add('hidden');
     }
 
     // Rendu de l'historique
