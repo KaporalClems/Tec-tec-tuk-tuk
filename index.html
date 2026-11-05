@@ -64,292 +64,344 @@
 
   <!-- ================= BARRE DU HAUT / HEADER ================= -->
   <header class="sticky top-0 z-30 bg-tecGreen-800 text-white shadow-md">
-    <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-2.5">
-        <div class="w-10 h-10 rounded-2xl bg-white p-1 shadow flex items-center justify-center overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white p-1 shadow flex items-center justify-center overflow-hidden shrink-0">
           <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tec%20tec%20logo.jpg" alt="Logo Tec-Tec" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/166534/ffffff?text=🛺';">
         </div>
         <div>
-          <h1 class="font-extrabold text-base tracking-tight leading-none text-white">Le Tec-Tec Tuk Tuk</h1>
-          <p class="text-[11px] text-emerald-200 font-medium tracking-wide">Cilaos • 100% Solaire & Éco</p>
+          <h1 class="font-extrabold text-base md:text-lg tracking-tight leading-none text-white">Le Tec-Tec Tuk Tuk</h1>
+          <p class="text-[11px] md:text-xs text-emerald-200 font-medium tracking-wide">Cilaos • 100% Solaire & Éco</p>
         </div>
       </div>
       
-      <!-- Bouton Install PWA ou Badge Statut -->
-      <button id="pwaInstallBtn" class="hidden text-xs bg-tecGold-500 hover:bg-tecGold-600 text-slate-900 font-bold px-2.5 py-1.5 rounded-xl shadow flex items-center space-x-1 transition">
-        <i data-lucide="download" class="w-3.5 h-3.5"></i>
-        <span>Installer</span>
-      </button>
-      <div class="flex items-center space-x-1.5 bg-tecGreen-900/60 border border-emerald-500/30 px-2 py-1 rounded-full text-[10px] text-emerald-300">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>Service Ouvert</span>
+      <!-- Navigation Desktop & Tablette (visible dès md:) -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 bg-tecGreen-900/50 p-1.5 rounded-2xl border border-emerald-500/20 text-xs font-semibold">
+        <button onclick="changeTab('booking')" id="navBookingDesktop" class="px-3.5 py-1.5 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5">
+          <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+          <span>Réserver</span>
+        </button>
+        <button onclick="changeTab('hub')" id="navHubDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
+          <i data-lucide="sun" class="w-4 h-4"></i>
+          <span>Hub Solaire</span>
+        </button>
+        <button onclick="changeTab('orders')" id="navOrdersDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
+          <i data-lucide="clock" class="w-4 h-4"></i>
+          <span>Mes Trajets</span>
+        </button>
+      </nav>
+
+      <!-- Actions Droite (Badge + Bouton Install) -->
+      <div class="flex items-center space-x-2">
+        <button id="pwaInstallBtn" class="hidden text-xs bg-tecGold-500 hover:bg-tecGold-600 text-slate-900 font-bold px-3 py-1.5 rounded-xl shadow flex items-center space-x-1.5 transition">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Installer l'app</span>
+        </button>
+        <div class="flex items-center space-x-1.5 bg-tecGreen-900/60 border border-emerald-500/30 px-2.5 py-1.5 rounded-full text-[11px] text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Service Ouvert</span>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- ================= CONTENU PRINCIPAL (ÉCRANS) ================= -->
-  <main class="flex-1 max-w-md w-full mx-auto pb-24 overflow-y-auto hide-scrollbar px-3 pt-3">
+  <main class="flex-1 max-w-6xl w-full mx-auto pb-24 md:pb-12 overflow-y-auto hide-scrollbar px-3 sm:px-6 lg:px-8 pt-4 md:pt-6">
 
     <!-- ========== VUE 1 : RÉSERVATION (ACCUEIL) ========== -->
-    <section id="view-booking" class="space-y-4">
+    <section id="view-booking" class="space-y-4 md:space-y-0 md:grid md:grid-cols-12 md:gap-6 lg:gap-8 items-start">
       
-      <!-- Bannière Présentation Flotte & Yannis -->
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-tecGreen-800 via-tecGreen-700 to-emerald-900 text-white p-4 shadow-xl">
-        <div class="relative z-10 space-y-2">
-          <div class="inline-flex items-center space-x-1 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-emerald-100">
-            <span>🌿 100% Électrique</span>
-            <span>•</span>
-            <span>Recharge Photovoltaïque</span>
+      <!-- Colonne Gauche (Desktop / Tablette) : Bannière + Infos Flotte -->
+      <div class="md:col-span-5 lg:col-span-5 space-y-4">
+        <!-- Bannière Présentation Flotte & Yannis -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-tecGreen-800 via-tecGreen-700 to-emerald-900 text-white p-5 lg:p-6 shadow-xl">
+          <div class="relative z-10 space-y-2.5">
+            <div class="inline-flex items-center space-x-1.5 bg-white/15 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-emerald-100">
+              <span>🌿 100% Électrique</span>
+              <span>•</span>
+              <span>Recharge Photovoltaïque</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold leading-tight">Déplacez-vous à Cilaos en toute sérénité</h2>
+            <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
+              Navettes rando vers le <strong>Piton des Neiges</strong> ou <strong>Mafate</strong>, et <strong>parking gardé sous ombrière solaire</strong>.
+            </p>
           </div>
-          <h2 class="text-xl font-bold leading-tight">Déplacez-vous à Cilaos en toute sérénité</h2>
-          <p class="text-xs text-emerald-100/90 leading-relaxed">
-            Navettes rando vers le <strong>Piton des Neiges</strong> ou <strong>Mafate</strong>, et <strong>parking gardé sous ombrière solaire</strong>.
+          <div class="absolute -right-4 -bottom-6 opacity-25">
+            <i data-lucide="sun" class="w-40 h-40 text-amber-300"></i>
+          </div>
+        </div>
+
+        <!-- Mini-Carte Visuelle Tuk-Tuk & Chauffeur Yannis (Visible en desktop) -->
+        <div class="hidden md:block bg-white rounded-3xl p-4 lg:p-5 shadow-sm border border-slate-200/80">
+          <div class="flex items-center space-x-3.5 mb-3">
+            <div class="w-16 h-16 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden shrink-0">
+              <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tuk-tuk%20tec-tec.jpeg" alt="Tuk-Tuk Cilaos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/166534/ffffff?text=Yannis';">
+            </div>
+            <div>
+              <span class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[10px] font-bold px-2 py-0.5 rounded-full mb-1">
+                <i data-lucide="shield-check" class="w-3 h-3"></i>
+                <span>Chauffeur Officiel</span>
+              </span>
+              <h3 class="font-extrabold text-slate-900 text-sm">Yannis en tenue Tec-Tec</h3>
+              <p class="text-xs text-slate-500">Conduite sécurisée et guidage dans le cirque</p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 bg-slate-50 p-3 rounded-2xl border border-slate-100 leading-relaxed">
+            "Je vous prends en charge directement à votre hébergement ou au parking pour vous déposer au pied des sentiers sans stress de stationnement."
           </p>
         </div>
-        <div class="absolute -right-4 -bottom-6 opacity-25">
-          <i data-lucide="sun" class="w-36 h-36 text-amber-300"></i>
-        </div>
       </div>
 
-      <!-- SÉLECTEUR DE SERVICE : TUK-TUK OU PARKING SOLAIRE -->
-      <div class="bg-white p-1 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-2 gap-1 text-center font-bold text-xs">
-        <button id="tabTuktuk" onclick="switchService('tuktuk')" class="py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1.5">
-          <i data-lucide="zap" class="w-4 h-4"></i>
-          <span>Navette Tuk-Tuk</span>
-        </button>
-        <button id="tabParking" onclick="switchService('parking')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1.5">
-          <i data-lucide="shield-check" class="w-4 h-4"></i>
-          <span>Parking Solaire</span>
-        </button>
-      </div>
-
-      <!-- FORMULAIRE DE RÉSERVATION -->
-      <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200/80 space-y-4">
+      <!-- Colonne Droite (Formulaire de Réservation) -->
+      <div class="md:col-span-7 lg:col-span-7 space-y-4">
         
-        <!-- SECTION TUK-TUK -->
-        <div id="serviceTuktukOptions" class="space-y-3">
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Destination / Parcours</label>
-          <div class="grid grid-cols-1 gap-2">
-            
-            <label class="relative flex items-center p-3 rounded-2xl border-2 border-tecGreen-700 bg-emerald-50/50 cursor-pointer transition">
-              <input type="radio" name="route" value="bloc" checked onchange="calculateTotal()" class="hidden">
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-slate-900">Sentier Le Bloc (Piton des Neiges)</span>
-                  <span class="text-xs font-extrabold text-tecGreen-800">6 € / pers.</span>
-                </div>
-                <p class="text-[11px] text-slate-500 mt-0.5">Navette directe aller ou retour • Bagages inclus</p>
-              </div>
-            </label>
+        <!-- SÉLECTEUR DE SERVICE : TUK-TUK OU PARKING SOLAIRE -->
+        <div class="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-2 gap-1 text-center font-bold text-xs sm:text-sm">
+          <button id="tabTuktuk" onclick="switchService('tuktuk')" class="py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1.5">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+            <span>Navette Tuk-Tuk</span>
+          </button>
+          <button id="tabParking" onclick="switchService('parking')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Parking Solaire Gardé</span>
+          </button>
+        </div>
 
-            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
-              <input type="radio" name="route" value="taibit" onchange="calculateTotal()" class="hidden">
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-slate-900">Col du Taïbit (Vers Mafate / Marla)</span>
-                  <span class="text-xs font-extrabold text-tecGreen-800">8 € / pers.</span>
+        <!-- FORMULAIRE DE RÉSERVATION -->
+        <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="bg-white rounded-3xl p-4 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
+          
+          <!-- SECTION TUK-TUK -->
+          <div id="serviceTuktukOptions" class="space-y-3">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Destination / Parcours</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-tecGreen-700 bg-emerald-50/50 cursor-pointer transition">
+                <input type="radio" name="route" value="bloc" checked onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Sentier Le Bloc</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">6 € / pers.</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Vers le Piton des Neiges • Bagages inclus</p>
                 </div>
-                <p class="text-[11px] text-slate-500 mt-0.5">Dépose au départ du sentier vers Mafate</p>
-              </div>
-            </label>
+              </label>
 
-            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
-              <input type="radio" name="route" value="centre" onchange="calculateTotal()" class="hidden">
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-slate-900">Centre Cilaos & Thermes</span>
-                  <span class="text-xs font-extrabold text-tecGreen-800">3 € / pers.</span>
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="route" value="taibit" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Col du Taïbit</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">8 € / pers.</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Dépose vers Mafate & Marla</p>
                 </div>
-                <p class="text-[11px] text-slate-500 mt-0.5">Marché forain, hôtels, bains thermaux, gîtes</p>
-              </div>
-            </label>
+              </label>
 
-            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
-              <input type="radio" name="route" value="tour" onchange="calculateTotal()" class="hidden">
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-slate-900">Grand Circuit Découverte (45 min)</span>
-                  <span class="text-xs font-extrabold text-tecGreen-800">20 € / pers.</span>
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="route" value="centre" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Centre & Thermes</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">3 € / pers.</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Marché forain, hôtels, bains thermaux</p>
                 </div>
-                <p class="text-[11px] text-slate-500 mt-0.5">Arrêts panoramiques guidés par Yannis avec anecdotes</p>
-              </div>
-            </label>
-          </div>
+              </label>
 
-          <!-- Nombre de Passagers -->
-          <div class="pt-2">
-            <div class="flex items-center justify-between mb-1.5">
-              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Passagers (Capacité 1 à 8)</label>
-              <span id="passengerCountDisplay" class="text-xs font-bold text-tecGreen-700 bg-emerald-100 px-2 py-0.5 rounded-lg">2 personnes</span>
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="route" value="tour" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Grand Tour (45 min)</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">20 € / pers.</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Arrêts panoramiques guidés par Yannis</p>
+                </div>
+              </label>
             </div>
-            <div class="flex items-center space-x-2">
+
+            <!-- Nombre de Passagers -->
+            <div class="pt-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Passagers (Capacité 1 à 8)</label>
+                <span id="passengerCountDisplay" class="text-xs font-bold text-tecGreen-700 bg-emerald-100 px-2.5 py-0.5 rounded-lg">2 personnes</span>
+              </div>
               <input type="range" id="passengersInput" min="1" max="8" value="2" oninput="calculateTotal()" class="w-full accent-tecGreen-700">
             </div>
           </div>
-        </div>
 
-        <!-- SECTION PARKING SOLAIRE & GARDIENNAGE (CACHÉE PAR DÉFAUT) -->
-        <div id="serviceParkingOptions" class="hidden space-y-3">
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Formule Gardiennage sous Ombrière</label>
-          <div class="grid grid-cols-1 gap-2">
-            
-            <label class="relative flex items-center p-3 rounded-2xl border-2 border-tecGreen-700 bg-emerald-50/50 cursor-pointer transition">
-              <input type="radio" name="parkingOption" value="24h" checked onchange="calculateTotal()" class="hidden">
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-slate-900">Bivouac Piton des Neiges (24h)</span>
-                  <span class="text-xs font-extrabold text-tecGreen-800">18 €</span>
+          <!-- SECTION PARKING SOLAIRE & GARDIENNAGE (CACHÉE PAR DÉFAUT) -->
+          <div id="serviceParkingOptions" class="hidden space-y-3">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Formule Gardiennage sous Ombrière</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-tecGreen-700 bg-emerald-50/50 cursor-pointer transition">
+                <input type="radio" name="parkingOption" value="24h" checked onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Bivouac Piton (24h)</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">18 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Parking sécurisé et ombragé 24h</p>
                 </div>
-                <p class="text-[11px] text-slate-500 mt-0.5">Parking fermé, ombragé et vidéosurveillé 4G</p>
-              </div>
-            </label>
+              </label>
 
-            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
-              <input type="radio" name="parkingOption" value="3days" onchange="calculateTotal()" class="hidden">
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-slate-900">Traversée Mafate (3 Jours / 72h)</span>
-                  <span class="text-xs font-extrabold text-tecGreen-800">42 €</span>
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="parkingOption" value="3days" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Mafate (3 Jours / 72h)</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">42 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Idéal traversée Marla / La Nouvelle</p>
                 </div>
-                <p class="text-[11px] text-slate-500 mt-0.5">Idéal pour le tour Marla / La Nouvelle</p>
-              </div>
-            </label>
+              </label>
 
-            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
-              <input type="radio" name="parkingOption" value="zenPack" onchange="calculateTotal()" class="hidden">
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-slate-900">Pack Traversée Zen (Tout Inclus)</span>
-                  <span class="text-xs font-extrabold text-tecGreen-800">80 €</span>
+              <label class="relative sm:col-span-2 flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="parkingOption" value="zenPack" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">Pack Traversée Zen (Tout Inclus)</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">80 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">3 j. parking gardé + Navettes Tuk-Tuk A/R pour 2 pers.</p>
                 </div>
-                <p class="text-[11px] text-slate-500 mt-0.5">3 j. parking gardé + Navette Tuk-Tuk A/R pour 2 pers.</p>
-              </div>
-            </label>
-          </div>
-
-          <!-- Option Recharge Électrique Véhicule -->
-          <label class="flex items-center space-x-2.5 p-3 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs cursor-pointer">
-            <input type="checkbox" id="evChargeOption" onchange="calculateTotal()" class="w-4 h-4 accent-amber-600 rounded">
-            <div>
-              <span class="font-bold text-amber-900">Option Recharge Solaire VE (+15 €)</span>
-              <p class="text-[11px] text-amber-800">Votre voiture électrique rechargée pendant votre rando</p>
+              </label>
             </div>
-          </label>
-        </div>
 
-        <!-- DATE ET HEURE -->
-        <div class="grid grid-cols-2 gap-2 pt-1">
-          <div>
-            <label class="block text-[11px] font-bold text-slate-600 mb-1">Date</label>
-            <input type="date" id="bookingDate" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 font-medium">
+            <!-- Option Recharge Électrique Véhicule -->
+            <label class="flex items-center space-x-2.5 p-3 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs cursor-pointer">
+              <input type="checkbox" id="evChargeOption" onchange="calculateTotal()" class="w-4 h-4 accent-amber-600 rounded">
+              <div>
+                <span class="font-bold text-amber-900">Option Recharge Solaire VE (+15 €)</span>
+                <p class="text-[11px] text-amber-800">Votre voiture électrique rechargée pendant votre rando</p>
+              </div>
+            </label>
           </div>
-          <div>
-            <label class="block text-[11px] font-bold text-slate-600 mb-1">Heure souhaitée</label>
-            <input type="time" id="bookingTime" required value="08:00" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 font-medium">
-          </div>
-        </div>
 
-        <!-- COORDONNÉES CLIENT -->
-        <div class="space-y-2 pt-1 border-t border-slate-100">
-          <div>
-            <label class="block text-[11px] font-bold text-slate-600 mb-1">Nom / Prénom</label>
-            <input type="text" id="clientName" placeholder="Ex: Jean Payet" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50">
+          <!-- DATE ET HEURE -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Date</label>
+              <input type="date" id="bookingDate" required class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-200 bg-slate-50 font-medium">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Heure souhaitée</label>
+              <input type="time" id="bookingTime" required value="08:00" class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-200 bg-slate-50 font-medium">
+            </div>
           </div>
-          <div>
-            <label class="block text-[11px] font-bold text-slate-600 mb-1">Téléphone mobile (WhatsApp)</label>
-            <input type="tel" id="clientPhone" placeholder="0692 XX XX XX" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50">
-          </div>
-        </div>
 
-        <!-- RÉCAPITULATIF DU PRIX -->
-        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between">
-          <div>
-            <span class="text-[11px] text-slate-500 font-medium">Total estimé :</span>
-            <div id="serviceLabelPreview" class="text-xs font-bold text-slate-800">Sentier Le Bloc (2 pers.)</div>
+          <!-- COORDONNÉES CLIENT -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 border-t border-slate-100">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Nom / Prénom</label>
+              <input type="text" id="clientName" placeholder="Ex: Jean Payet" required class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-200 bg-slate-50">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Téléphone (WhatsApp)</label>
+              <input type="tel" id="clientPhone" placeholder="0692 XX XX XX" required class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-200 bg-slate-50">
+            </div>
           </div>
-          <div class="text-right">
-            <span id="priceDisplay" class="text-xl font-extrabold text-tecGreen-800">12 €</span>
-          </div>
-        </div>
 
-        <!-- BOUTON D'ENVOI -->
-        <button type="submit" class="w-full py-3.5 px-4 bg-tecGreen-700 active:bg-tecGreen-800 hover:bg-tecGreen-600 text-white font-bold text-sm rounded-2xl shadow-lg shadow-tecGreen-800/25 flex items-center justify-center space-x-2 transition">
-          <i data-lucide="check-circle" class="w-4 h-4"></i>
-          <span>Confirmer ma demande</span>
-        </button>
-      </form>
+          <!-- RÉCAPITULATIF DU PRIX -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] text-slate-500 font-medium">Total estimé :</span>
+              <div id="serviceLabelPreview" class="text-xs sm:text-sm font-bold text-slate-800">Sentier Le Bloc (2 pers.)</div>
+            </div>
+            <div class="text-right">
+              <span id="priceDisplay" class="text-2xl font-extrabold text-tecGreen-800">12 €</span>
+            </div>
+          </div>
+
+          <!-- BOUTON D'ENVOI -->
+          <button type="submit" class="w-full py-3.5 px-4 bg-tecGreen-700 active:bg-tecGreen-800 hover:bg-tecGreen-600 text-white font-bold text-sm sm:text-base rounded-2xl shadow-lg shadow-tecGreen-800/25 flex items-center justify-center space-x-2 transition">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>Confirmer ma demande de réservation</span>
+          </button>
+        </form>
+      </div>
     </section>
 
     <!-- ========== VUE 2 : LE HUB & INFOS YANNIS ========== -->
-    <section id="view-hub" class="hidden space-y-4">
+    <section id="view-hub" class="hidden space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0">
       
       <!-- Fiche Conducteur Yannis -->
-      <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200/80 space-y-3">
-        <div class="flex items-center space-x-3">
-          <div class="w-16 h-16 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden flex items-center justify-center">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
+        <div class="flex items-center space-x-4">
+          <div class="w-20 h-20 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden shrink-0">
             <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tuk-tuk%20tec-tec.jpeg" alt="Tuk-Tuk Cilaos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/166534/ffffff?text=Yannis';">
           </div>
           <div>
-            <div class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[10px] font-bold px-2 py-0.5 rounded-full mb-1">
-              <i data-lucide="shield-check" class="w-3 h-3"></i>
+            <div class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
               <span>Conducteur Officiel Homologué</span>
             </div>
-            <h3 class="font-extrabold text-slate-900 text-base">Yannis</h3>
-            <p class="text-xs text-slate-500">Chauffeur local & guide des sentiers de Cilaos</p>
+            <h3 class="font-extrabold text-slate-900 text-lg">Yannis</h3>
+            <p class="text-xs sm:text-sm text-slate-500">Chauffeur professionnel & accompagnateur</p>
           </div>
         </div>
         
-        <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-2xl border border-slate-100">
-          "Bienvenue à Cilaos ! Toujours en tenue officielle Tec-Tec, je vous conduis en toute sécurité vers vos départs de rando ou pour une découverte insolite de nos îlets."
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
+          "Bienvenue à Cilaos ! Équipé de ma tenue professionnelle officielle Tec-Tec, je vous conduis avec passion vers les départs de randonnée et vous partage l'histoire de nos îlets emblématiques."
         </p>
+
+        <div class="grid grid-cols-2 gap-2 text-center text-xs">
+          <div class="p-3 bg-emerald-50 rounded-xl font-semibold text-emerald-900">
+            ⚡ Conduite douce
+          </div>
+          <div class="p-3 bg-amber-50 rounded-xl font-semibold text-amber-900">
+            🎒 Porte-sacs rando
+          </div>
+        </div>
       </div>
 
       <!-- Données Live du Hub Solaire -->
-      <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200/80 space-y-3">
-        <h4 class="font-bold text-xs uppercase tracking-wider text-slate-600 flex items-center space-x-1.5">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
+        <h4 class="font-bold text-xs uppercase tracking-wider text-slate-600 flex items-center space-x-2">
           <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
-          <span>Hub Solaire & Container Connecté</span>
+          <span>Hub Solaire & Container Autonome</span>
         </h4>
 
-        <div class="grid grid-cols-2 gap-2">
-          <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
-            <span class="text-[11px] text-slate-400">Autonomie Flotte</span>
-            <div class="flex items-center space-x-1.5 mt-1">
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            <span class="text-xs text-slate-400">Autonomie Flotte</span>
+            <div class="flex items-center space-x-1.5 mt-1.5">
               <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-              <span class="font-black text-slate-800 text-sm">98 %</span>
+              <span class="font-black text-slate-800 text-base sm:text-lg">98 %</span>
             </div>
-            <span class="text-[10px] text-slate-400">Recharge 100% solaire</span>
+            <span class="text-[11px] text-slate-400">Recharge 100% solaire</span>
           </div>
 
-          <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
-            <span class="text-[11px] text-slate-400">Places Parking Libres</span>
-            <div class="flex items-center space-x-1.5 mt-1">
-              <span class="font-black text-tecGreen-700 text-sm">6 / 15</span>
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            <span class="text-xs text-slate-400">Places Parking Libres</span>
+            <div class="flex items-center space-x-1.5 mt-1.5">
+              <span class="font-black text-tecGreen-700 text-base sm:text-lg">6 / 15</span>
             </div>
-            <span class="text-[10px] text-slate-400">Ombrières sécurisées</span>
+            <span class="text-[11px] text-slate-400">Ombrières sécurisées</span>
           </div>
         </div>
 
-        <div class="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 flex items-center space-x-2.5">
-          <i data-lucide="leaf" class="w-5 h-5 text-tecGreen-700 shrink-0"></i>
-          <p class="text-[11px] leading-tight">
-            <strong>0 gramme de CO₂ émis :</strong> Tous vos trajets sont compensés et propulsés par le soleil de Cilaos.
+        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-900 flex items-center space-x-3">
+          <i data-lucide="leaf" class="w-6 h-6 text-tecGreen-700 shrink-0"></i>
+          <p class="leading-relaxed">
+            <strong>0 gramme de CO₂ émis :</strong> Véhicules et batteries rechargés localement grâce à l'énergie solaire du cirque de Cilaos.
           </p>
         </div>
       </div>
     </section>
 
     <!-- ========== VUE 3 : MES RÉSERVATIONS / HISTORIQUE ========== -->
-    <section id="view-orders" class="hidden space-y-3">
+    <section id="view-orders" class="hidden space-y-4 max-w-2xl mx-auto">
       <div class="flex items-center justify-between">
-        <h3 class="font-extrabold text-sm text-slate-900">Mes Demandes & Trajets</h3>
-        <span id="orderCountBadge" class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-bold">0</span>
+        <h3 class="font-extrabold text-base text-slate-900">Mes Demandes & Trajets</h3>
+        <span id="orderCountBadge" class="text-xs bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded-full font-bold">0</span>
       </div>
 
-      <div id="bookingList" class="space-y-2">
-        <div class="bg-white rounded-3xl p-6 text-center text-slate-400 border border-dashed border-slate-200">
-          <i data-lucide="calendar" class="w-8 h-8 mx-auto mb-2 opacity-40"></i>
-          <p class="text-xs">Aucune réservation pour le moment.</p>
+      <div id="bookingList" class="space-y-2.5">
+        <div class="bg-white rounded-3xl p-8 text-center text-slate-400 border border-dashed border-slate-200">
+          <i data-lucide="calendar" class="w-10 h-10 mx-auto mb-2.5 opacity-40"></i>
+          <p class="text-sm">Aucune réservation pour le moment.</p>
         </div>
       </div>
     </section>
@@ -358,28 +410,28 @@
 
   <!-- ================= POPUP MODAL CONFIRMATION ================= -->
   <div id="confirmModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-5 max-w-xs w-full shadow-2xl border border-slate-100 text-center space-y-3">
-      <div class="w-12 h-12 bg-emerald-100 text-tecGreen-700 rounded-2xl flex items-center justify-center mx-auto text-xl">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-slate-100 text-center space-y-3">
+      <div class="w-14 h-14 bg-emerald-100 text-tecGreen-700 rounded-2xl flex items-center justify-center mx-auto text-2xl">
         🎉
       </div>
-      <h3 class="font-bold text-base text-slate-900">Demande Enregistrée !</h3>
-      <p class="text-xs text-slate-500 leading-relaxed" id="modalSummary">
+      <h3 class="font-bold text-lg text-slate-900">Demande Enregistrée !</h3>
+      <p class="text-xs sm:text-sm text-slate-500 leading-relaxed" id="modalSummary">
         Votre navette a bien été prise en compte.
       </p>
       <div class="pt-2 space-y-2">
-        <a id="whatsappSendBtn" href="#" target="_blank" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs font-bold rounded-xl shadow-md flex items-center justify-center space-x-1.5 transition">
+        <a id="whatsappSendBtn" href="#" target="_blank" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md flex items-center justify-center space-x-2 transition">
           <i data-lucide="message-circle" class="w-4 h-4"></i>
           <span>Envoyer à Yannis (WhatsApp)</span>
         </a>
-        <button onclick="closeModal()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl">
+        <button onclick="closeModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold rounded-xl">
           Fermer
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= BARRE DE NAVIGATION INFÉRIEURE ================= -->
-  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2">
+  <!-- ================= BARRE DE NAVIGATION INFÉRIEURE (Mobile uniquement) ================= -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2">
     <div class="max-w-md mx-auto px-6 grid grid-cols-3 gap-1 text-center">
       
       <button onclick="changeTab('booking')" id="navBooking" class="flex flex-col items-center justify-center text-tecGreen-700 font-bold transition">
@@ -410,25 +462,37 @@
     tomorrow.setDate(tomorrow.getDate() + 1);
     document.getElementById('bookingDate').value = tomorrow.toISOString().split('T')[0];
 
-    // Changement d'onglet de navigation
+    // Changement d'onglet de navigation (Mobile & Desktop)
     function changeTab(tabName) {
       document.getElementById('view-booking').classList.add('hidden');
       document.getElementById('view-hub').classList.add('hidden');
       document.getElementById('view-orders').classList.add('hidden');
 
+      // Reset Mobile Nav
       document.getElementById('navBooking').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
       document.getElementById('navHub').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
       document.getElementById('navOrders').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
 
+      // Reset Desktop Nav
+      const dInactive = "px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5";
+      const dActive = "px-3.5 py-1.5 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5 font-bold";
+
+      document.getElementById('navBookingDesktop').className = dInactive;
+      document.getElementById('navHubDesktop').className = dInactive;
+      document.getElementById('navOrdersDesktop').className = dInactive;
+
       if (tabName === 'booking') {
         document.getElementById('view-booking').classList.remove('hidden');
         document.getElementById('navBooking').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
+        document.getElementById('navBookingDesktop').className = dActive;
       } else if (tabName === 'hub') {
         document.getElementById('view-hub').classList.remove('hidden');
         document.getElementById('navHub').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
+        document.getElementById('navHubDesktop').className = dActive;
       } else if (tabName === 'orders') {
         document.getElementById('view-orders').classList.remove('hidden');
         document.getElementById('navOrders').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
+        document.getElementById('navOrdersDesktop').className = dActive;
       }
       lucide.createIcons();
     }
@@ -562,9 +626,9 @@
 
       if (myBookings.length === 0) {
         container.innerHTML = `
-          <div class="bg-white rounded-3xl p-6 text-center text-slate-400 border border-dashed border-slate-200">
-            <i data-lucide="calendar" class="w-8 h-8 mx-auto mb-2 opacity-40"></i>
-            <p class="text-xs">Aucune réservation pour le moment.</p>
+          <div class="bg-white rounded-3xl p-8 text-center text-slate-400 border border-dashed border-slate-200">
+            <i data-lucide="calendar" class="w-10 h-10 mx-auto mb-2.5 opacity-40"></i>
+            <p class="text-sm">Aucune réservation pour le moment.</p>
           </div>
         `;
         lucide.createIcons();
@@ -572,20 +636,20 @@
       }
 
       container.innerHTML = myBookings.map(b => `
-        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
           <div>
-            <div class="flex items-center space-x-1.5">
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${b.service === 'tuktuk' ? 'bg-emerald-100 text-tecGreen-800' : 'bg-amber-100 text-amber-800'}">
+            <div class="flex items-center space-x-2">
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${b.service === 'tuktuk' ? 'bg-emerald-100 text-tecGreen-800' : 'bg-amber-100 text-amber-800'}">
                 ${b.service === 'tuktuk' ? 'Tuk-Tuk' : 'Parking Solaire'}
               </span>
-              <span class="text-xs font-bold text-slate-800">${b.date} • ${b.time}</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-800">${b.date} • ${b.time}</span>
             </div>
-            <p class="text-xs font-semibold text-slate-700 mt-1">${b.detail}</p>
+            <p class="text-xs sm:text-sm font-semibold text-slate-700 mt-1">${b.detail}</p>
             <p class="text-[11px] text-slate-400">${b.name}</p>
           </div>
           <div class="text-right">
-            <span class="text-sm font-extrabold text-tecGreen-700">${b.price}</span>
-            <div class="text-[10px] text-emerald-600 font-bold">Confirmé</div>
+            <span class="text-base sm:text-lg font-extrabold text-tecGreen-700">${b.price}</span>
+            <div class="text-[11px] text-emerald-600 font-bold">Confirmé</div>
           </div>
         </div>
       `).join('');
@@ -595,6 +659,24 @@
     function closeModal() {
       document.getElementById('confirmModal').classList.add('hidden');
     }
+
+    // Gestion installation PWA
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('pwaInstallBtn');
+      if (installBtn) {
+        installBtn.classList.remove('hidden');
+        installBtn.addEventListener('click', () => {
+          installBtn.classList.add('hidden');
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(() => {
+            deferredPrompt = null;
+          });
+        });
+      }
+    });
 
     // Enregistrement Service Worker
     if ('serviceWorker' in navigator) {
