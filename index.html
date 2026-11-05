@@ -1,10 +1,11 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-50">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Le Tec-Tec Tuk Tuk Cilaos - Écomobilité & Parking Solaire</title>
   
-  <!-- Manifeste PWA adapté aux sous-dossiers GitHub Pages -->
+  <!-- Manifeste PWA adapté à GitHub Pages -->
   <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Le%20Tec-Tec%20Tuk%20Tuk%20Cilaos%22%2C%22short_name%22%3A%22Tec-Tec%20Tuk%22%2C%22start_url%22%3A%22.%2F%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23166534%22%2C%22theme_color%22%3A%22%23166534%22%7D">
   <meta name="theme-color" content="#166534">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,15 +13,349 @@
   <meta name="apple-mobile-web-app-title" content="Tec-Tec Tuk">
 
   <!-- Tailwind CSS & Lucide Icons -->
-<!-- ... existing code ... -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            tecGreen: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            tecGold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Empêcher le pull-to-refresh agressif sur mobile */
+    body {
+      overscroll-behavior-y: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="h-full font-sans text-slate-800 bg-slate-100 flex flex-col justify-between select-none">
+
+  <!-- ================= BARRE DU HAUT / HEADER ================= -->
+  <header class="sticky top-0 z-30 bg-tecGreen-800 text-white shadow-md">
+    <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2.5">
+        <div class="w-10 h-10 rounded-2xl bg-white p-1 shadow flex items-center justify-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tec%20tec%20logo.jpg" alt="Logo Tec-Tec" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/166534/ffffff?text=🛺';">
+        </div>
+        <div>
+          <h1 class="font-extrabold text-base tracking-tight leading-none text-white">Le Tec-Tec Tuk Tuk</h1>
+          <p class="text-[11px] text-emerald-200 font-medium tracking-wide">Cilaos • 100% Solaire & Éco</p>
+        </div>
+      </div>
+      
+      <!-- Bouton Install PWA ou Badge Statut -->
+      <button id="pwaInstallBtn" class="hidden text-xs bg-tecGold-500 hover:bg-tecGold-600 text-slate-900 font-bold px-2.5 py-1.5 rounded-xl shadow flex items-center space-x-1 transition">
+        <i data-lucide="download" class="w-3.5 h-3.5"></i>
+        <span>Installer</span>
+      </button>
+      <div class="flex items-center space-x-1.5 bg-tecGreen-900/60 border border-emerald-500/30 px-2 py-1 rounded-full text-[10px] text-emerald-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Service Ouvert</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= CONTENU PRINCIPAL (ÉCRANS) ================= -->
+  <main class="flex-1 max-w-md w-full mx-auto pb-24 overflow-y-auto hide-scrollbar px-3 pt-3">
+
+    <!-- ========== VUE 1 : RÉSERVATION (ACCUEIL) ========== -->
+    <section id="view-booking" class="space-y-4">
+      
+      <!-- Bannière Présentation Flotte & Yannis -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-tecGreen-800 via-tecGreen-700 to-emerald-900 text-white p-4 shadow-xl">
+        <div class="relative z-10 space-y-2">
+          <div class="inline-flex items-center space-x-1 bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-emerald-100">
+            <span>🌿 100% Électrique</span>
+            <span>•</span>
+            <span>Recharge Photovoltaïque</span>
+          </div>
+          <h2 class="text-xl font-bold leading-tight">Déplacez-vous à Cilaos en toute sérénité</h2>
+          <p class="text-xs text-emerald-100/90 leading-relaxed">
+            Navettes rando vers le <strong>Piton des Neiges</strong> ou <strong>Mafate</strong>, et <strong>parking gardé sous ombrière solaire</strong>.
+          </p>
+        </div>
+        <div class="absolute -right-4 -bottom-6 opacity-25">
+          <i data-lucide="sun" class="w-36 h-36 text-amber-300"></i>
+        </div>
+      </div>
+
+      <!-- SÉLECTEUR DE SERVICE : TUK-TUK OU PARKING SOLAIRE -->
+      <div class="bg-white p-1 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-2 gap-1 text-center font-bold text-xs">
+        <button id="tabTuktuk" onclick="switchService('tuktuk')" class="py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1.5">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>Navette Tuk-Tuk</span>
+        </button>
+        <button id="tabParking" onclick="switchService('parking')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1.5">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          <span>Parking Solaire</span>
+        </button>
+      </div>
+
+      <!-- FORMULAIRE DE RÉSERVATION -->
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200/80 space-y-4">
+        
+        <!-- SECTION TUK-TUK -->
+        <div id="serviceTuktukOptions" class="space-y-3">
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Destination / Parcours</label>
+          <div class="grid grid-cols-1 gap-2">
+            
+            <label class="relative flex items-center p-3 rounded-2xl border-2 border-tecGreen-700 bg-emerald-50/50 cursor-pointer transition">
+              <input type="radio" name="route" value="bloc" checked onchange="calculateTotal()" class="hidden">
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">Sentier Le Bloc (Piton des Neiges)</span>
+                  <span class="text-xs font-extrabold text-tecGreen-800">6 € / pers.</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Navette directe aller ou retour • Bagages inclus</p>
+              </div>
+            </label>
+
+            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+              <input type="radio" name="route" value="taibit" onchange="calculateTotal()" class="hidden">
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">Col du Taïbit (Vers Mafate / Marla)</span>
+                  <span class="text-xs font-extrabold text-tecGreen-800">8 € / pers.</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Dépose au départ du sentier vers Mafate</p>
+              </div>
+            </label>
+
+            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+              <input type="radio" name="route" value="centre" onchange="calculateTotal()" class="hidden">
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">Centre Cilaos & Thermes</span>
+                  <span class="text-xs font-extrabold text-tecGreen-800">3 € / pers.</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Marché forain, hôtels, bains thermaux, gîtes</p>
+              </div>
+            </label>
+
+            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+              <input type="radio" name="route" value="tour" onchange="calculateTotal()" class="hidden">
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">Grand Circuit Découverte (45 min)</span>
+                  <span class="text-xs font-extrabold text-tecGreen-800">20 € / pers.</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Arrêts panoramiques guidés par Yannis avec anecdotes</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- Nombre de Passagers -->
+          <div class="pt-2">
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Passagers (Capacité 1 à 8)</label>
+              <span id="passengerCountDisplay" class="text-xs font-bold text-tecGreen-700 bg-emerald-100 px-2 py-0.5 rounded-lg">2 personnes</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <input type="range" id="passengersInput" min="1" max="8" value="2" oninput="calculateTotal()" class="w-full accent-tecGreen-700">
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION PARKING SOLAIRE & GARDIENNAGE (CACHÉE PAR DÉFAUT) -->
+        <div id="serviceParkingOptions" class="hidden space-y-3">
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Formule Gardiennage sous Ombrière</label>
+          <div class="grid grid-cols-1 gap-2">
+            
+            <label class="relative flex items-center p-3 rounded-2xl border-2 border-tecGreen-700 bg-emerald-50/50 cursor-pointer transition">
+              <input type="radio" name="parkingOption" value="24h" checked onchange="calculateTotal()" class="hidden">
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">Bivouac Piton des Neiges (24h)</span>
+                  <span class="text-xs font-extrabold text-tecGreen-800">18 €</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Parking fermé, ombragé et vidéosurveillé 4G</p>
+              </div>
+            </label>
+
+            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+              <input type="radio" name="parkingOption" value="3days" onchange="calculateTotal()" class="hidden">
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">Traversée Mafate (3 Jours / 72h)</span>
+                  <span class="text-xs font-extrabold text-tecGreen-800">42 €</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Idéal pour le tour Marla / La Nouvelle</p>
+              </div>
+            </label>
+
+            <label class="relative flex items-center p-3 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+              <input type="radio" name="parkingOption" value="zenPack" onchange="calculateTotal()" class="hidden">
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">Pack Traversée Zen (Tout Inclus)</span>
+                  <span class="text-xs font-extrabold text-tecGreen-800">80 €</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">3 j. parking gardé + Navette Tuk-Tuk A/R pour 2 pers.</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- Option Recharge Électrique Véhicule -->
+          <label class="flex items-center space-x-2.5 p-3 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs cursor-pointer">
+            <input type="checkbox" id="evChargeOption" onchange="calculateTotal()" class="w-4 h-4 accent-amber-600 rounded">
+            <div>
+              <span class="font-bold text-amber-900">Option Recharge Solaire VE (+15 €)</span>
+              <p class="text-[11px] text-amber-800">Votre voiture électrique rechargée pendant votre rando</p>
+            </div>
+          </label>
+        </div>
+
+        <!-- DATE ET HEURE -->
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Date</label>
+            <input type="date" id="bookingDate" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 font-medium">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Heure souhaitée</label>
+            <input type="time" id="bookingTime" required value="08:00" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 font-medium">
+          </div>
+        </div>
+
+        <!-- COORDONNÉES CLIENT -->
+        <div class="space-y-2 pt-1 border-t border-slate-100">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Nom / Prénom</label>
+            <input type="text" id="clientName" placeholder="Ex: Jean Payet" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Téléphone mobile (WhatsApp)</label>
+            <input type="tel" id="clientPhone" placeholder="0692 XX XX XX" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50">
+          </div>
+        </div>
+
+        <!-- RÉCAPITULATIF DU PRIX -->
+        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between">
+          <div>
+            <span class="text-[11px] text-slate-500 font-medium">Total estimé :</span>
+            <div id="serviceLabelPreview" class="text-xs font-bold text-slate-800">Sentier Le Bloc (2 pers.)</div>
+          </div>
+          <div class="text-right">
+            <span id="priceDisplay" class="text-xl font-extrabold text-tecGreen-800">12 €</span>
+          </div>
+        </div>
+
         <!-- BOUTON D'ENVOI -->
-        <button type="submit" class="w-full py-3.5 px-4 bg-tecGreen-700 active:bg-tecGreen-800 hover:bg-tecGreen-600 text-white font-bold text-sm rounded-2xl shadow-lg shadow-tecGreen-800/25 flex items-center justify-center space-x-2 transition tap-highlight-transparent">
+        <button type="submit" class="w-full py-3.5 px-4 bg-tecGreen-700 active:bg-tecGreen-800 hover:bg-tecGreen-600 text-white font-bold text-sm rounded-2xl shadow-lg shadow-tecGreen-800/25 flex items-center justify-center space-x-2 transition">
           <i data-lucide="check-circle" class="w-4 h-4"></i>
           <span>Confirmer ma demande</span>
         </button>
       </form>
     </section>
-<!-- ... existing code ... -->
+
+    <!-- ========== VUE 2 : LE HUB & INFOS YANNIS ========== -->
+    <section id="view-hub" class="hidden space-y-4">
+      
+      <!-- Fiche Conducteur Yannis -->
+      <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200/80 space-y-3">
+        <div class="flex items-center space-x-3">
+          <div class="w-16 h-16 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden flex items-center justify-center">
+            <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tuk-tuk%20tec-tec.jpeg" alt="Tuk-Tuk Cilaos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/166534/ffffff?text=Yannis';">
+          </div>
+          <div>
+            <div class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[10px] font-bold px-2 py-0.5 rounded-full mb-1">
+              <i data-lucide="shield-check" class="w-3 h-3"></i>
+              <span>Conducteur Officiel Homologué</span>
+            </div>
+            <h3 class="font-extrabold text-slate-900 text-base">Yannis</h3>
+            <p class="text-xs text-slate-500">Chauffeur local & guide des sentiers de Cilaos</p>
+          </div>
+        </div>
+        
+        <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-2xl border border-slate-100">
+          "Bienvenue à Cilaos ! Toujours en tenue officielle Tec-Tec, je vous conduis en toute sécurité vers vos départs de rando ou pour une découverte insolite de nos îlets."
+        </p>
+      </div>
+
+      <!-- Données Live du Hub Solaire -->
+      <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200/80 space-y-3">
+        <h4 class="font-bold text-xs uppercase tracking-wider text-slate-600 flex items-center space-x-1.5">
+          <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
+          <span>Hub Solaire & Container Connecté</span>
+        </h4>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+            <span class="text-[11px] text-slate-400">Autonomie Flotte</span>
+            <div class="flex items-center space-x-1.5 mt-1">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+              <span class="font-black text-slate-800 text-sm">98 %</span>
+            </div>
+            <span class="text-[10px] text-slate-400">Recharge 100% solaire</span>
+          </div>
+
+          <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+            <span class="text-[11px] text-slate-400">Places Parking Libres</span>
+            <div class="flex items-center space-x-1.5 mt-1">
+              <span class="font-black text-tecGreen-700 text-sm">6 / 15</span>
+            </div>
+            <span class="text-[10px] text-slate-400">Ombrières sécurisées</span>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 flex items-center space-x-2.5">
+          <i data-lucide="leaf" class="w-5 h-5 text-tecGreen-700 shrink-0"></i>
+          <p class="text-[11px] leading-tight">
+            <strong>0 gramme de CO₂ émis :</strong> Tous vos trajets sont compensés et propulsés par le soleil de Cilaos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== VUE 3 : MES RÉSERVATIONS / HISTORIQUE ========== -->
+    <section id="view-orders" class="hidden space-y-3">
+      <div class="flex items-center justify-between">
+        <h3 class="font-extrabold text-sm text-slate-900">Mes Demandes & Trajets</h3>
+        <span id="orderCountBadge" class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-bold">0</span>
+      </div>
+
+      <div id="bookingList" class="space-y-2">
+        <div class="bg-white rounded-3xl p-6 text-center text-slate-400 border border-dashed border-slate-200">
+          <i data-lucide="calendar" class="w-8 h-8 mx-auto mb-2 opacity-40"></i>
+          <p class="text-xs">Aucune réservation pour le moment.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <!-- ================= POPUP MODAL CONFIRMATION ================= -->
   <div id="confirmModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-5 max-w-xs w-full shadow-2xl border border-slate-100 text-center space-y-3">
@@ -44,7 +379,155 @@
   </div>
 
   <!-- ================= BARRE DE NAVIGATION INFÉRIEURE ================= -->
-<!-- ... existing code ... -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2">
+    <div class="max-w-md mx-auto px-6 grid grid-cols-3 gap-1 text-center">
+      
+      <button onclick="changeTab('booking')" id="navBooking" class="flex flex-col items-center justify-center text-tecGreen-700 font-bold transition">
+        <i data-lucide="calendar-plus" class="w-5 h-5 mb-0.5"></i>
+        <span class="text-[10px]">Réserver</span>
+      </button>
+
+      <button onclick="changeTab('hub')" id="navHub" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
+        <i data-lucide="sun" class="w-5 h-5 mb-0.5"></i>
+        <span class="text-[10px]">Hub Solaire</span>
+      </button>
+
+      <button onclick="changeTab('orders')" id="navOrders" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
+        <i data-lucide="clock" class="w-5 h-5 mb-0.5"></i>
+        <span class="text-[10px]">Mes Trajets</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    let currentService = 'tuktuk';
+    let myBookings = [];
+
+    // Date par défaut : Demain
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('bookingDate').value = tomorrow.toISOString().split('T')[0];
+
+    // Changement d'onglet de navigation
+    function changeTab(tabName) {
+      document.getElementById('view-booking').classList.add('hidden');
+      document.getElementById('view-hub').classList.add('hidden');
+      document.getElementById('view-orders').classList.add('hidden');
+
+      document.getElementById('navBooking').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
+      document.getElementById('navHub').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
+      document.getElementById('navOrders').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
+
+      if (tabName === 'booking') {
+        document.getElementById('view-booking').classList.remove('hidden');
+        document.getElementById('navBooking').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
+      } else if (tabName === 'hub') {
+        document.getElementById('view-hub').classList.remove('hidden');
+        document.getElementById('navHub').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
+      } else if (tabName === 'orders') {
+        document.getElementById('view-orders').classList.remove('hidden');
+        document.getElementById('navOrders').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
+      }
+      lucide.createIcons();
+    }
+
+    // Bascule entre Tuk-Tuk et Parking Solaire
+    function switchService(service) {
+      currentService = service;
+      const tabTuktuk = document.getElementById('tabTuktuk');
+      const tabParking = document.getElementById('tabParking');
+      const tuktukOpts = document.getElementById('serviceTuktukOptions');
+      const parkingOpts = document.getElementById('serviceParkingOptions');
+
+      if (service === 'tuktuk') {
+        tabTuktuk.className = "py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1.5";
+        tabParking.className = "py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1.5";
+        tuktukOpts.classList.remove('hidden');
+        parkingOpts.classList.add('hidden');
+      } else {
+        tabParking.className = "py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1.5";
+        tabTuktuk.className = "py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1.5";
+        parkingOpts.classList.remove('hidden');
+        tuktukOpts.classList.add('hidden');
+      }
+      calculateTotal();
+      lucide.createIcons();
+    }
+
+    // Calcul dynamique des tarifs
+    function calculateTotal() {
+      let total = 0;
+      let label = "";
+
+      if (currentService === 'tuktuk') {
+        const pass = parseInt(document.getElementById('passengersInput').value);
+        document.getElementById('passengerCountDisplay').innerText = `${pass} ${pass > 1 ? 'personnes' : 'personne'}`;
+
+        const selectedRoute = document.querySelector('input[name="route"]:checked').value;
+        if (selectedRoute === 'bloc') {
+          total = pass * 6;
+          label = `Sentier Le Bloc (${pass} pers.)`;
+        } else if (selectedRoute === 'taibit') {
+          total = pass * 8;
+          label = `Col du Taïbit (${pass} pers.)`;
+        } else if (selectedRoute === 'centre') {
+          total = pass * 3;
+          label = `Centre / Thermes (${pass} pers.)`;
+        } else if (selectedRoute === 'tour') {
+          total = pass * 20;
+          label = `Grand Tour (${pass} pers.)`;
+        }
+      } else {
+        const selectedParking = document.querySelector('input[name="parkingOption"]:checked').value;
+        const hasEv = document.getElementById('evChargeOption').checked;
+
+        if (selectedParking === '24h') {
+          total = 18;
+          label = "Parking 24h Piton";
+        } else if (selectedParking === '3days') {
+          total = 42;
+          label = "Parking 3 Jours Mafate";
+        } else if (selectedParking === 'zenPack') {
+          total = 80;
+          label = "Pack Traversée Zen (Parking+Navette)";
+        }
+
+        if (hasEv) {
+          total += 15;
+          label += " + Charge VE";
+        }
+      }
+
+      document.getElementById('priceDisplay').innerText = `${total} €`;
+      document.getElementById('serviceLabelPreview').innerText = label;
+    }
+
+    // Soumission du formulaire
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('clientName').value;
+      const phone = document.getElementById('clientPhone').value;
+      const date = document.getElementById('bookingDate').value;
+      const time = document.getElementById('bookingTime').value;
+      const price = document.getElementById('priceDisplay').innerText;
+      const detail = document.getElementById('serviceLabelPreview').innerText;
+
+      const newBooking = {
+        id: Date.now(),
+        name,
+        phone,
+        date,
+        time,
+        price,
+        detail,
+        service: currentService
+      };
+
+      myBookings.unshift(newBooking);
+      renderBookings();
+
       // Affichage Modal
       document.getElementById('modalSummary').innerHTML = `
         <strong>${name}</strong>, votre réservation pour <strong>${detail}</strong> le ${date} à ${time} a bien été enregistrée.<br><br>
@@ -52,7 +535,7 @@
       `;
 
       // Préparation du lien WhatsApp avec message pré-rempli
-      const phoneClean = "262692000000"; // Remplacez par le numéro Réunion réel de Yannis
+      const phoneClean = "262692000000"; // Numéro de Yannis à adapter
       const waMsg = encodeURIComponent(
         `Bonjour Yannis ! Réservation Tec-Tec Tuk Tuk :\n` +
         `• Nom : ${name}\n` +
@@ -72,29 +555,57 @@
     }
 
     // Rendu de l'historique
-<!-- ... existing code ... -->
-    // Enregistrement d'un Service Worker minimal inline compatible GitHub Pages
+    function renderBookings() {
+      const container = document.getElementById('bookingList');
+      const badge = document.getElementById('orderCountBadge');
+      badge.innerText = myBookings.length;
+
+      if (myBookings.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl p-6 text-center text-slate-400 border border-dashed border-slate-200">
+            <i data-lucide="calendar" class="w-8 h-8 mx-auto mb-2 opacity-40"></i>
+            <p class="text-xs">Aucune réservation pour le moment.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = myBookings.map(b => `
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+          <div>
+            <div class="flex items-center space-x-1.5">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${b.service === 'tuktuk' ? 'bg-emerald-100 text-tecGreen-800' : 'bg-amber-100 text-amber-800'}">
+                ${b.service === 'tuktuk' ? 'Tuk-Tuk' : 'Parking Solaire'}
+              </span>
+              <span class="text-xs font-bold text-slate-800">${b.date} • ${b.time}</span>
+            </div>
+            <p class="text-xs font-semibold text-slate-700 mt-1">${b.detail}</p>
+            <p class="text-[11px] text-slate-400">${b.name}</p>
+          </div>
+          <div class="text-right">
+            <span class="text-sm font-extrabold text-tecGreen-700">${b.price}</span>
+            <div class="text-[10px] text-emerald-600 font-bold">Confirmé</div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      document.getElementById('confirmModal').classList.add('hidden');
+    }
+
+    // Enregistrement Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         const swBlob = new Blob([`
-          const CACHE_NAME = 'tectec-cache-v1';
-          self.addEventListener('install', (e) => {
-            self.skipWaiting();
-          });
-          self.addEventListener('activate', (e) => {
-            e.waitUntil(clients.claim());
-          });
-          self.addEventListener('fetch', (e) => {
-            e.respondWith(
-              fetch(e.request).catch(() => caches.match(e.request))
-            );
-          });
+          self.addEventListener('install', (e) => self.skipWaiting());
+          self.addEventListener('activate', (e) => e.waitUntil(clients.claim()));
+          self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
         `], { type: 'application/javascript' });
         
-        navigator.serviceWorker.register(URL.createObjectURL(swBlob), { scope: './' })
-          .catch(() => {
-            // Repli silencieux si environnement iframe ou restriction CSP
-          });
+        navigator.serviceWorker.register(URL.createObjectURL(swBlob), { scope: './' }).catch(() => {});
       });
     }
 
@@ -102,6 +613,7 @@
     window.onload = function() {
       calculateTotal();
       renderBookings();
+      lucide.createIcons();
     };
   </script>
 </body>
