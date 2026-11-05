@@ -199,15 +199,19 @@
       <!-- Colonne Droite (Formulaire de Réservation) -->
       <div class="md:col-span-7 lg:col-span-7 space-y-4">
         
-        <!-- SÉLECTEUR DE SERVICE : TUK-TUK OU PARKING SOLAIRE -->
-        <div class="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-2 gap-1 text-center font-bold text-xs sm:text-sm">
-          <button id="tabTuktuk" onclick="switchService('tuktuk')" class="py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1.5">
-            <i data-lucide="zap" class="w-4 h-4"></i>
-            <span>Navette Tuk-Tuk</span>
+        <!-- SÉLECTEUR DE SERVICE : TUK-TUK, PARKING SOLAIRE OU ÉVÉNEMENTS -->
+        <div class="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-3 gap-1 text-center font-bold text-[11px] sm:text-xs md:text-sm">
+          <button id="tabTuktuk" onclick="switchService('tuktuk')" class="py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1">
+            <i data-lucide="zap" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+            <span>Navette</span>
           </button>
-          <button id="tabParking" onclick="switchService('parking')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1.5">
-            <i data-lucide="shield-check" class="w-4 h-4"></i>
-            <span>Parking Solaire Gardé</span>
+          <button id="tabParking" onclick="switchService('parking')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+            <span>Parking</span>
+          </button>
+          <button id="tabEvents" onclick="switchService('events')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-tecGold-500"></i>
+            <span>Événements</span>
           </button>
         </div>
 
@@ -319,6 +323,79 @@
               <div>
                 <span class="font-bold text-amber-900">Option Recharge Solaire VE (+15 €)</span>
                 <p class="text-[11px] text-amber-800">Votre voiture électrique rechargée pendant votre rando</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- SECTION ÉVÉNEMENTS & SUR-MESURE (CACHÉE PAR DÉFAUT) -->
+          <div id="serviceEventsOptions" class="hidden space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Type d'Événement & Prestation</label>
+              <span class="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">100% Personnalisable</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-tecGreen-700 bg-emerald-50/50 cursor-pointer transition">
+                <input type="radio" name="eventOption" value="mariage" checked onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">💍 Mariage & Cortège</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">180 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">3h avec chauffeur Yannis • Décoration & fleurs péi</p>
+                </div>
+              </label>
+
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="eventOption" value="evg_evjf" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">🎉 EVG / EVJF & Fêtes</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">140 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Forfait 2h festif • Tour des points de vue & photos</p>
+                </div>
+              </label>
+
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="eventOption" value="anniversaire" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">🎂 Anniversaire / Groupe</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">65 € / h</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Balade insolite enfants & familles dans le cirque</p>
+                </div>
+              </label>
+
+              <label class="relative flex items-center p-3 sm:p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 cursor-pointer transition">
+                <input type="radio" name="eventOption" value="livraison" onchange="calculateTotal()" class="hidden">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900">📦 Livraison Express & Gîtes</span>
+                    <span class="text-xs font-extrabold text-tecGreen-800">20 €</span>
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Colis, bagages gîtes, courses, paniers repas péi</p>
+                </div>
+              </label>
+            </div>
+
+            <!-- Durée de mise à disposition (si anniversaire / privatisation à l'heure) -->
+            <div id="eventHoursBlock" class="pt-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-100 hidden">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Durée de mise à disposition</label>
+                <span id="eventHoursDisplay" class="text-xs font-bold text-tecGreen-700 bg-emerald-100 px-2.5 py-0.5 rounded-lg">2 heures</span>
+              </div>
+              <input type="range" id="eventHoursInput" min="1" max="8" value="2" oninput="calculateTotal()" class="w-full accent-tecGreen-700">
+            </div>
+
+            <!-- Option Pack Décoration & Ambiance Musique -->
+            <label class="flex items-center space-x-2.5 p-3 rounded-2xl bg-pink-50/70 border border-pink-200 text-xs cursor-pointer">
+              <input type="checkbox" id="eventDecoOption" onchange="calculateTotal()" class="w-4 h-4 accent-pink-600 rounded">
+              <div>
+                <span class="font-bold text-pink-900">Option Décoration Spéciale & Enceinte Bluetooth (+25 €)</span>
+                <p class="text-[11px] text-pink-800">Guirlandes, pancarte festive personnalisée et playlist au choix</p>
               </div>
             </label>
           </div>
@@ -637,65 +714,37 @@
     let currentService = 'tuktuk';
     let myBookings = [];
     let lastBookingData = null; // Pour l'export agenda
-
-    // Date par défaut : Demain
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    document.getElementById('bookingDate').value = tomorrow.toISOString().split('T')[0];
-
-    // Changement d'onglet de navigation (Mobile & Desktop)
-    function changeTab(tabName) {
-      document.getElementById('view-booking').classList.add('hidden');
-      document.getElementById('view-hub').classList.add('hidden');
-      document.getElementById('view-orders').classList.add('hidden');
-
-      // Reset Mobile Nav
-      document.getElementById('navBooking').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
-      document.getElementById('navHub').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
-      document.getElementById('navOrders').className = "flex flex-col items-center justify-center text-slate-400 font-medium";
-
-      // Reset Desktop Nav
-      const dInactive = "px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5";
-      const dActive = "px-3.5 py-1.5 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5 font-bold";
-
-      document.getElementById('navBookingDesktop').className = dInactive;
-      document.getElementById('navHubDesktop').className = dInactive;
-      document.getElementById('navOrdersDesktop').className = dInactive;
-
-      if (tabName === 'booking') {
-        document.getElementById('view-booking').classList.remove('hidden');
-        document.getElementById('navBooking').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
-        document.getElementById('navBookingDesktop').className = dActive;
-      } else if (tabName === 'hub') {
-        document.getElementById('view-hub').classList.remove('hidden');
-        document.getElementById('navHub').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
-        document.getElementById('navHubDesktop').className = dActive;
-      } else if (tabName === 'orders') {
-        document.getElementById('view-orders').classList.remove('hidden');
-        document.getElementById('navOrders').className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold";
-        document.getElementById('navOrdersDesktop').className = dActive;
-      }
-      lucide.createIcons();
-    }
-
-    // Bascule entre Tuk-Tuk et Parking Solaire
+    // Bascule entre Tuk-Tuk, Parking Solaire et Événements
     function switchService(service) {
       currentService = service;
       const tabTuktuk = document.getElementById('tabTuktuk');
       const tabParking = document.getElementById('tabParking');
+      const tabEvents = document.getElementById('tabEvents');
       const tuktukOpts = document.getElementById('serviceTuktukOptions');
       const parkingOpts = document.getElementById('serviceParkingOptions');
+      const eventsOpts = document.getElementById('serviceEventsOptions');
+
+      // Styles de base
+      const activeClass = "py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1";
+      const inactiveClass = "py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1";
+
+      tabTuktuk.className = inactiveClass;
+      tabParking.className = inactiveClass;
+      tabEvents.className = inactiveClass;
+
+      tuktukOpts.classList.add('hidden');
+      parkingOpts.classList.add('hidden');
+      eventsOpts.classList.add('hidden');
 
       if (service === 'tuktuk') {
-        tabTuktuk.className = "py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1.5";
-        tabParking.className = "py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1.5";
+        tabTuktuk.className = activeClass;
         tuktukOpts.classList.remove('hidden');
-        parkingOpts.classList.add('hidden');
-      } else {
-        tabParking.className = "py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1.5";
-        tabTuktuk.className = "py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1.5";
+      } else if (service === 'parking') {
+        tabParking.className = activeClass;
         parkingOpts.classList.remove('hidden');
-        tuktukOpts.classList.add('hidden');
+      } else if (service === 'events') {
+        tabEvents.className = activeClass;
+        eventsOpts.classList.remove('hidden');
       }
       calculateTotal();
       lucide.createIcons();
@@ -724,7 +773,7 @@
           total = pass * 20;
           label = `Grand Tour (${pass} pers.)`;
         }
-      } else {
+      } else if (currentService === 'parking') {
         const selectedParking = document.querySelector('input[name="parkingOption"]:checked').value;
         const hasEv = document.getElementById('evChargeOption').checked;
 
@@ -742,6 +791,35 @@
         if (hasEv) {
           total += 15;
           label += " + Charge VE";
+        }
+      } else if (currentService === 'events') {
+        const selectedEvent = document.querySelector('input[name="eventOption"]:checked').value;
+        const hoursBlock = document.getElementById('eventHoursBlock');
+        const hasDeco = document.getElementById('eventDecoOption').checked;
+
+        if (selectedEvent === 'mariage') {
+          total = 180;
+          label = "Mariage & Cortège (3h)";
+          hoursBlock.classList.add('hidden');
+        } else if (selectedEvent === 'evg_evjf') {
+          total = 140;
+          label = "EVG / EVJF Tour Cilaos (2h)";
+          hoursBlock.classList.add('hidden');
+        } else if (selectedEvent === 'anniversaire') {
+          hoursBlock.classList.remove('hidden');
+          const hours = parseInt(document.getElementById('eventHoursInput').value);
+          document.getElementById('eventHoursDisplay').innerText = `${hours} ${hours > 1 ? 'heures' : 'heure'}`;
+          total = hours * 65;
+          label = `Anniversaire / Privatisation (${hours}h)`;
+        } else if (selectedEvent === 'livraison') {
+          total = 20;
+          label = "Livraison Express & Colis Cilaos";
+          hoursBlock.classList.add('hidden');
+        }
+
+        if (hasDeco) {
+          total += 25;
+          label += " + Déco Festive";
         }
       }
 
@@ -923,8 +1001,14 @@ END:VCALENDAR`;
         <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
           <div>
             <div class="flex items-center space-x-2">
-              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${b.service === 'tuktuk' ? 'bg-emerald-100 text-tecGreen-800' : 'bg-amber-100 text-amber-800'}">
-                ${b.service === 'tuktuk' ? 'Tuk-Tuk' : 'Parking Solaire'}
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
+                b.service === 'tuktuk' 
+                  ? 'bg-emerald-100 text-tecGreen-800' 
+                  : b.service === 'parking' 
+                    ? 'bg-amber-100 text-amber-800' 
+                    : 'bg-pink-100 text-pink-800'
+              }">
+                ${b.service === 'tuktuk' ? 'Tuk-Tuk' : b.service === 'parking' ? 'Parking Solaire' : 'Événement'}
               </span>
               <span class="text-xs sm:text-sm font-bold text-slate-800">${b.date} • ${b.time}</span>
             </div>
