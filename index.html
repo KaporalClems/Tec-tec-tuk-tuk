@@ -1,0 +1,108 @@
+<!-- ... existing code ... -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Le Tec-Tec Tuk Tuk Cilaos - Écomobilité & Parking Solaire</title>
+  
+  <!-- Manifeste PWA adapté aux sous-dossiers GitHub Pages -->
+  <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Le%20Tec-Tec%20Tuk%20Tuk%20Cilaos%22%2C%22short_name%22%3A%22Tec-Tec%20Tuk%22%2C%22start_url%22%3A%22.%2F%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23166534%22%2C%22theme_color%22%3A%22%23166534%22%7D">
+  <meta name="theme-color" content="#166534">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Tec-Tec Tuk">
+
+  <!-- Tailwind CSS & Lucide Icons -->
+<!-- ... existing code ... -->
+        <!-- BOUTON D'ENVOI -->
+        <button type="submit" class="w-full py-3.5 px-4 bg-tecGreen-700 active:bg-tecGreen-800 hover:bg-tecGreen-600 text-white font-bold text-sm rounded-2xl shadow-lg shadow-tecGreen-800/25 flex items-center justify-center space-x-2 transition tap-highlight-transparent">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+          <span>Confirmer ma demande</span>
+        </button>
+      </form>
+    </section>
+<!-- ... existing code ... -->
+  <!-- ================= POPUP MODAL CONFIRMATION ================= -->
+  <div id="confirmModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-5 max-w-xs w-full shadow-2xl border border-slate-100 text-center space-y-3">
+      <div class="w-12 h-12 bg-emerald-100 text-tecGreen-700 rounded-2xl flex items-center justify-center mx-auto text-xl">
+        🎉
+      </div>
+      <h3 class="font-bold text-base text-slate-900">Demande Enregistrée !</h3>
+      <p class="text-xs text-slate-500 leading-relaxed" id="modalSummary">
+        Votre navette a bien été prise en compte.
+      </p>
+      <div class="pt-2 space-y-2">
+        <a id="whatsappSendBtn" href="#" target="_blank" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs font-bold rounded-xl shadow-md flex items-center justify-center space-x-1.5 transition">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Envoyer à Yannis (WhatsApp)</span>
+        </a>
+        <button onclick="closeModal()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= BARRE DE NAVIGATION INFÉRIEURE ================= -->
+<!-- ... existing code ... -->
+      // Affichage Modal
+      document.getElementById('modalSummary').innerHTML = `
+        <strong>${name}</strong>, votre réservation pour <strong>${detail}</strong> le ${date} à ${time} a bien été enregistrée.<br><br>
+        Montant estimé : <strong>${price}</strong>
+      `;
+
+      // Préparation du lien WhatsApp avec message pré-rempli
+      const phoneClean = "262692000000"; // Remplacez par le numéro Réunion réel de Yannis
+      const waMsg = encodeURIComponent(
+        `Bonjour Yannis ! Réservation Tec-Tec Tuk Tuk :\n` +
+        `• Nom : ${name}\n` +
+        `• Téléphone : ${phone}\n` +
+        `• Prestation : ${detail}\n` +
+        `• Date/Heure : ${date} à ${time}\n` +
+        `• Montant : ${price}`
+      );
+      document.getElementById('whatsappSendBtn').href = `https://wa.me/${phoneClean}?text=${waMsg}`;
+
+      document.getElementById('confirmModal').classList.remove('hidden');
+      lucide.createIcons();
+
+      // Réinitialisation des coordonnées
+      document.getElementById('clientName').value = '';
+      document.getElementById('clientPhone').value = '';
+    }
+
+    // Rendu de l'historique
+<!-- ... existing code ... -->
+    // Enregistrement d'un Service Worker minimal inline compatible GitHub Pages
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        const swBlob = new Blob([`
+          const CACHE_NAME = 'tectec-cache-v1';
+          self.addEventListener('install', (e) => {
+            self.skipWaiting();
+          });
+          self.addEventListener('activate', (e) => {
+            e.waitUntil(clients.claim());
+          });
+          self.addEventListener('fetch', (e) => {
+            e.respondWith(
+              fetch(e.request).catch(() => caches.match(e.request))
+            );
+          });
+        `], { type: 'application/javascript' });
+        
+        navigator.serviceWorker.register(URL.createObjectURL(swBlob), { scope: './' })
+          .catch(() => {
+            // Repli silencieux si environnement iframe ou restriction CSP
+          });
+      });
+    }
+
+    // Initialisation au chargement
+    window.onload = function() {
+      calculateTotal();
+      renderBookings();
+    };
+  </script>
+</body>
+</html>
