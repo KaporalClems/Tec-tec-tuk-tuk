@@ -120,7 +120,8 @@
   </div>
 
   <!-- ================= BARRE DU HAUT / HEADER FIXE ================= -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-tecGreen-800/95 backdrop-blur-md text-white shadow-lg border-b border-emerald-900/40 transition-all">
+  <!-- Caché au démarrage (opacity-0 pointer-events-none), révélé après la vidéo -->
+  <header id="appHeader" class="fixed top-0 left-0 right-0 z-40 bg-tecGreen-800/95 backdrop-blur-md text-white shadow-lg border-b border-emerald-900/40 opacity-0 pointer-events-none transition-opacity duration-700">
     <div class="max-w-6xl mx-auto px-4 lg:px-8 py-2.5 md:py-3 flex items-center justify-between">
       <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('section-booking')">
         <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white p-1 shadow flex items-center justify-center overflow-hidden shrink-0">
@@ -925,7 +926,8 @@
   </div>
 
   <!-- ================= MODULE FLOTTANT ANIMÉ CONTACT & ITINÉRAIRE (FAB) ================= -->
-  <div id="floatingQuickContact" class="fixed right-4 md:right-8 bottom-20 md:bottom-8 z-40 flex flex-col items-end space-y-2.5">
+  <!-- Caché au démarrage, révélé après la vidéo -->
+  <div id="floatingQuickContact" class="fixed right-4 md:right-8 bottom-20 md:bottom-8 z-40 flex flex-col items-end space-y-2.5 opacity-0 pointer-events-none transition-opacity duration-700">
     
     <!-- Menu Déroulant d'Actions Rapides (Caché par défaut) -->
     <div id="fabMenu" class="hidden flex flex-col items-end space-y-2 transition-all duration-300 transform scale-95 opacity-0 origin-bottom-right">
@@ -991,7 +993,8 @@
   </div>
 
   <!-- ================= BARRE DE NAVIGATION INFÉRIEURE (Mobile uniquement) ================= -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2">
+  <!-- Cachée au démarrage, révélée après la vidéo -->
+  <nav id="mobileNav" class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2 opacity-0 pointer-events-none transition-opacity duration-700">
     <div class="max-w-md mx-auto px-4 grid grid-cols-5 gap-1 text-center">
       
       <button onclick="scrollToSection('section-booking')" id="navBooking" class="flex flex-col items-center justify-center text-tecGreen-700 font-bold transition">
@@ -1545,6 +1548,22 @@ END:VCALENDAR`;
       const splash = document.getElementById('videoSplash');
       if (splash && !splash.classList.contains('fade-out')) {
         splash.classList.add('fade-out');
+
+        // Révéler le header, la nav mobile et le bouton flottant après la vidéo
+        const header = document.getElementById('appHeader');
+        const fab = document.getElementById('floatingQuickContact');
+        const mobileNav = document.getElementById('mobileNav');
+
+        if (header) {
+          header.classList.remove('opacity-0', 'pointer-events-none');
+        }
+        if (fab) {
+          fab.classList.remove('opacity-0', 'pointer-events-none');
+        }
+        if (mobileNav) {
+          mobileNav.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
         setTimeout(() => {
           splash.style.display = 'none';
         }, 700);
@@ -1555,6 +1574,16 @@ END:VCALENDAR`;
       const splash = document.getElementById('videoSplash');
       const video = document.getElementById('splashVideo');
       const bar = document.getElementById('splashProgressBar');
+
+      // Masquer à nouveau les barres si on rejoue la vidéo
+      const header = document.getElementById('appHeader');
+      const fab = document.getElementById('floatingQuickContact');
+      const mobileNav = document.getElementById('mobileNav');
+
+      if (header) header.classList.add('opacity-0', 'pointer-events-none');
+      if (fab) fab.classList.add('opacity-0', 'pointer-events-none');
+      if (mobileNav) mobileNav.classList.add('opacity-0', 'pointer-events-none');
+
       if (splash && video) {
         splash.style.display = 'flex';
         splash.classList.remove('fade-out');
