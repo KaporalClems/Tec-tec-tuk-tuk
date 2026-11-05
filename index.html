@@ -64,6 +64,19 @@
       pointer-events: none;
       transition: opacity 0.6s ease-out;
     }
+
+    /* Animation de pulsation pour le module flottant Yannis */
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6), 0 10px 25px -5px rgba(20, 83, 45, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 0 12px rgba(22, 163, 74, 0), 0 15px 30px -5px rgba(20, 83, 45, 0.5);
+      }
+    }
+    .fab-pulse {
+      animation: pulse-glow 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
   </style>
 </head>
 <body class="h-full font-sans text-slate-800 bg-slate-100 flex flex-col justify-between select-none">
@@ -124,7 +137,15 @@
         </button>
         <button onclick="changeTab('hub')" id="navHubDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
           <i data-lucide="sun" class="w-4 h-4"></i>
-          <span>Hub Solaire</span>
+          <span>Hub Solaire & Yannis</span>
+        </button>
+        <button onclick="changeTab('reviews')" id="navReviewsDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
+          <i data-lucide="star" class="w-4 h-4"></i>
+          <span>Avis Clients</span>
+        </button>
+        <button onclick="changeTab('contact')" id="navContactDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
+          <i data-lucide="map-pin" class="w-4 h-4"></i>
+          <span>Contact & Accès</span>
         </button>
         <button onclick="changeTab('orders')" id="navOrdersDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
           <i data-lucide="clock" class="w-4 h-4"></i>
@@ -150,7 +171,7 @@
   </header>
 
   <!-- ================= CONTENU PRINCIPAL (ÉCRANS) ================= -->
-  <main class="flex-1 max-w-6xl w-full mx-auto pb-24 md:pb-12 overflow-y-auto hide-scrollbar px-3 sm:px-6 lg:px-8 pt-4 md:pt-6">
+  <main class="flex-1 max-w-6xl w-full mx-auto pb-24 md:pb-6 overflow-y-auto hide-scrollbar px-3 sm:px-6 lg:px-8 pt-4 md:pt-6">
 
     <!-- ========== VUE 1 : RÉSERVATION (ACCUEIL) ========== -->
     <section id="view-booking" class="space-y-4 md:space-y-0 md:grid md:grid-cols-12 md:gap-6 lg:gap-8 items-start">
@@ -167,7 +188,7 @@
             </div>
             <h2 class="text-xl sm:text-2xl font-bold leading-tight">Déplacez-vous à Cilaos en toute sérénité</h2>
             <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
-              Navettes rando vers le <strong>Piton des Neiges</strong> ou <strong>Mafate</strong>, et <strong>parking gardé sous ombrière solaire</strong>.
+              Navettes rando vers le <strong>Piton des Neiges</strong> ou <strong>Mafate</strong>, forfaits <strong>curistes</strong> et <strong>parking gardé sous ombrière solaire</strong>.
             </p>
           </div>
           <div class="absolute -right-4 -bottom-6 opacity-25">
@@ -193,6 +214,16 @@
           <p class="text-xs text-slate-600 bg-slate-50 p-3 rounded-2xl border border-slate-100 leading-relaxed">
             "Je vous prends en charge directement à votre hébergement ou au parking pour vous déposer au pied des sentiers sans stress de stationnement."
           </p>
+
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-semibold">
+            <span class="flex items-center space-x-1 text-emerald-700">
+              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+              <span>Hub 100% Solaire</span>
+            </span>
+            <button onclick="changeTab('contact')" class="hover:text-tecGreen-800 underline">
+              Accès & Itinéraire
+            </button>
+          </div>
         </div>
       </div>
 
@@ -583,6 +614,199 @@
       </div>
     </section>
 
+    <!-- ========== VUE NOUVELLE : AVIS CLIENTS ========== -->
+    <section id="view-reviews" class="hidden space-y-6">
+      <!-- Bloc Résumé des Avis -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-gradient-to-br from-amber-50 to-orange-50/60 rounded-3xl p-5 md:p-6 border border-amber-200/70">
+        <div class="md:col-span-8 space-y-2">
+          <div class="flex items-center space-x-1.5 text-amber-500">
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <span class="text-sm font-black text-amber-900 ml-2">4.9 / 5 sur 68 avis vérifiés</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900">La référence transport & gardiennage à Cilaos</h3>
+          <p class="text-xs text-slate-600">Recommandé par les randonneurs du Piton des Neiges, les curistes et les gîtes du cirque.</p>
+        </div>
+        <div class="md:col-span-4 flex justify-end">
+          <button onclick="openReviewLink()" class="w-full md:w-auto py-3 px-5 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-slate-950 font-extrabold text-xs rounded-2xl flex items-center justify-center space-x-2 shadow-sm transition">
+            <i data-lucide="message-square-heart" class="w-4 h-4"></i>
+            <span>Laisser un avis Google</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Grille des Avis Témoignages -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Avis 1 : Randonneur Piton des Neiges -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
+                  MR
+                </div>
+                <div>
+                  <h5 class="text-xs font-bold text-slate-900">Mathieu Rivière</h5>
+                  <p class="text-[10px] text-slate-400">Randonnée Piton des Neiges</p>
+                </div>
+              </div>
+              <div class="flex text-amber-400">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed italic">
+              « La formule parking solaire + dépose au Bloc est un pur régal ! Voiture à l'ombre et en sécurité pendant 2 jours. Yannis est ponctuel, souriant et de très bon conseil pour le sentier. Incontournable ! »
+            </p>
+          </div>
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+            <span class="text-emerald-700 font-semibold flex items-center space-x-1">
+              <i data-lucide="check" class="w-3 h-3"></i>
+              <span>Avis certifié</span>
+            </span>
+            <span>Il y a 3 jours</span>
+          </div>
+        </div>
+
+        <!-- Avis 2 : Curiste Thermes de Cilaos -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-cyan-700 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
+                  FD
+                </div>
+                <div>
+                  <h5 class="text-xs font-bold text-slate-900">Françoise & Daniel</h5>
+                  <p class="text-[10px] text-slate-400">Curistes (3 semaines)</p>
+                </div>
+              </div>
+              <div class="flex text-amber-400">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed italic">
+              « Nous venons en cure à Cilaos depuis 6 ans et c'est la 1ère fois que nous n'avons pas à nous soucier des pentes et du stationnement. Yannis vient nous chercher chaque matin au gîte. Chauffeur très attentionné ! »
+            </p>
+          </div>
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+            <span class="text-cyan-700 font-semibold flex items-center space-x-1">
+              <i data-lucide="check" class="w-3 h-3"></i>
+              <span>Forfait 21 Jours</span>
+            </span>
+            <span>Il y a 1 semaine</span>
+          </div>
+        </div>
+
+        <!-- Avis 3 : Événement / Mariage & Touriste -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-pink-600 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
+                  EL
+                </div>
+                <div>
+                  <h5 class="text-xs font-bold text-slate-900">Élodie & Lucas</h5>
+                  <p class="text-[10px] text-slate-400">Mariage & Cortège Cilaos</p>
+                </div>
+              </div>
+              <div class="flex text-amber-400">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed italic">
+              « Le tuk-tuk floqué Tec-Tec décoré de fleurs locales pour notre mariage a fait sensation auprès de tous les invités ! Les photos avec les montagnes en arrière-plan sont magnifiques. Merci encore ! »
+            </p>
+          </div>
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+            <span class="text-pink-600 font-semibold flex items-center space-x-1">
+              <i data-lucide="check" class="w-3 h-3"></i>
+              <span>Prestation Événement</span>
+            </span>
+            <span>Il y a 2 semaines</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== VUE NOUVELLE : CONTACT, ACCÈS & RÉSEAUX ========== -->
+    <section id="view-contact" class="hidden space-y-6">
+      <!-- Carte Contact & Itinéraire Google Maps -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/80">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <span class="inline-flex items-center space-x-1.5 bg-emerald-100 text-tecGreen-800 text-xs font-bold px-3 py-1 rounded-full">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+              <span>Hub Principal & Parking Solaire</span>
+            </span>
+            <h3 class="font-extrabold text-slate-900 text-xl">Tec-Tec Tuk Tuk Cilaos</h3>
+            <p class="text-sm text-slate-600">1 Route de Bras-Sec, 97413 Cilaos, Île de La Réunion</p>
+            <div class="flex flex-wrap items-center gap-4 pt-1 text-sm text-slate-600">
+              <a href="tel:+262692000000" class="hover:text-tecGreen-700 font-bold flex items-center space-x-1.5">
+                <i data-lucide="phone" class="w-4 h-4 text-tecGreen-600"></i>
+                <span>06 92 XX XX XX</span>
+              </a>
+              <span>•</span>
+              <a href="mailto:tec-tec@tuk-tuk.fr" class="hover:text-tecGreen-700 font-semibold flex items-center space-x-1.5">
+                <i data-lucide="mail" class="w-4 h-4 text-tecGreen-600"></i>
+                <span>tec-tec@tuk-tuk.fr</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Boutons Actions Rapides -->
+          <div class="flex flex-wrap sm:flex-nowrap gap-3">
+            <a href="https://www.google.com/maps/search/?api=1&query=1+Route+de+Bras-Sec+97413+Cilaos" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center space-x-2 transition shadow-sm">
+              <i data-lucide="navigation" class="w-4 h-4 text-tecGold-400"></i>
+              <span>Itinéraire Google Maps</span>
+            </a>
+            <a href="https://wa.me/262692000000?text=Bonjour%20Tec-Tec%20Tuk%20Tuk%20!" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center space-x-2 transition shadow-sm">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+              <span>WhatsApp Yannis</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Réseaux Sociaux & Communauté -->
+      <div class="bg-white rounded-3xl p-6 border border-slate-200/80 space-y-4">
+        <div>
+          <span class="text-[11px] font-bold text-tecGreen-700 uppercase tracking-wider">Suivez-nous</span>
+          <h4 class="font-extrabold text-slate-900 text-base mt-0.5">Communauté & Actualités Cilaos</h4>
+          <p class="text-xs text-slate-500">Retrouvez nos photos, l'état des sentiers et les actus du cirque au quotidien.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1.5 transition">
+            <i data-lucide="instagram" class="w-5 h-5 text-pink-600"></i>
+            <span>Instagram</span>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1.5 transition">
+            <i data-lucide="facebook" class="w-5 h-5 text-blue-600"></i>
+            <span>Facebook</span>
+          </a>
+          <a href="https://tripadvisor.fr" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1.5 transition">
+            <i data-lucide="award" class="w-5 h-5 text-emerald-600"></i>
+            <span>Tripadvisor</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== VUE 3 : MES RÉSERVATIONS / HISTORIQUE ========== -->
     <section id="view-orders" class="hidden space-y-4 max-w-2xl mx-auto">
       <div class="flex items-center justify-between">
@@ -598,223 +822,17 @@
       </div>
     </section>
 
-    <!-- ========== NOUVELLE SECTION : CONTACT, ITINÉRAIRE, AVIS & RÉSEAUX ========== -->
-    <section class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
-      
-      <!-- Carte Contact & Itinéraire Google Maps -->
-      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div class="space-y-1.5">
-            <span class="inline-flex items-center space-x-1.5 bg-emerald-100 text-tecGreen-800 text-xs font-bold px-3 py-1 rounded-full">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-              <span>Hub Principal & Accueil Randonneurs</span>
-            </span>
-            <h3 class="font-extrabold text-slate-900 text-lg">Tec-Tec Tuk Tuk Cilaos</h3>
-            <p class="text-xs sm:text-sm text-slate-600">1 Route de Bras-Sec, 97413 Cilaos, La Réunion</p>
-            <div class="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-500">
-              <a href="tel:+262692000000" class="hover:text-tecGreen-700 font-semibold flex items-center space-x-1">
-                <i data-lucide="phone" class="w-3.5 h-3.5 text-tecGreen-600"></i>
-                <span>06 92 XX XX XX</span>
-              </a>
-              <span>•</span>
-              <a href="mailto:tec-tec@tuk-tuk.fr" class="hover:text-tecGreen-700 font-semibold flex items-center space-x-1">
-                <i data-lucide="mail" class="w-3.5 h-3.5 text-tecGreen-600"></i>
-                <span>tec-tec@tuk-tuk.fr</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Boutons Actions Rapides : Itinéraire Maps & Appel -->
-          <div class="flex flex-wrap sm:flex-nowrap gap-2">
-            <a href="https://www.google.com/maps/search/?api=1&query=1+Route+de+Bras-Sec+97413+Cilaos" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center space-x-2 transition shadow-sm">
-              <i data-lucide="navigation" class="w-4 h-4 text-tecGold-400"></i>
-              <span>Itinéraire Maps</span>
-            </a>
-            <a href="https://wa.me/262692000000?text=Bonjour%20Tec-Tec%20Tuk%20Tuk%20!" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center space-x-2 transition shadow-sm">
-              <i data-lucide="message-circle" class="w-4 h-4"></i>
-              <span>WhatsApp Direct</span>
-            </a>
-          </div>
-        </div>
+    <!-- Footer : Liens Juridiques & Copyright (Toujours visible et compact) -->
+    <footer class="mt-8 pt-4 pb-2 text-center text-xs text-slate-400 space-y-2 border-t border-slate-200/60">
+      <div class="flex items-center justify-center space-x-3 text-slate-500 font-medium">
+        <button onclick="openLegalModal('mentions')" class="hover:text-tecGreen-700 underline underline-offset-4">Mentions Légales</button>
+        <span>•</span>
+        <button onclick="openLegalModal('privacy')" class="hover:text-tecGreen-700 underline underline-offset-4">Politique de Confidentialité</button>
+        <span>•</span>
+        <button onclick="openLegalModal('cgu')" class="hover:text-tecGreen-700 underline underline-offset-4">CGV / Transports</button>
       </div>
-
-      <!-- Bloc Réseaux Sociaux & Avis Google / TripAdvisor -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        
-        <!-- Boîte Avis Clients -->
-        <div class="bg-gradient-to-br from-amber-50 to-orange-50/60 rounded-3xl p-5 border border-amber-200/70 flex flex-col justify-between space-y-3">
-          <div>
-            <div class="flex items-center space-x-1 text-amber-500 mb-1">
-              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
-              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
-              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
-              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
-              <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
-              <span class="text-xs font-black text-amber-900 ml-1.5">4.9 / 5 • 68 avis</span>
-            </div>
-            <h4 class="font-extrabold text-slate-900 text-sm">Votre expérience compte pour nous !</h4>
-            <p class="text-xs text-slate-600 mt-1">Vous avez voyagé avec Yannis ? Aidez d'autres randonneurs et curistes en partageant votre avis.</p>
-          </div>
-          <button onclick="openReviewLink()" class="w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-slate-950 font-extrabold text-xs rounded-2xl flex items-center justify-center space-x-2 shadow-sm transition">
-            <i data-lucide="message-square-heart" class="w-4 h-4"></i>
-            <span>Laisser un avis (Google Avis)</span>
-          </button>
-        </div>
-
-        <!-- Boîte Réseaux Sociaux -->
-        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 flex flex-col justify-between space-y-3">
-          <div>
-            <span class="text-[11px] font-bold text-tecGreen-700 uppercase tracking-wider">Suivez nos aventures</span>
-            <h4 class="font-extrabold text-slate-900 text-sm mt-0.5">Communauté & Actualités Cilaos</h4>
-            <p class="text-xs text-slate-500 mt-1">Retrouvez nos photos, l'état des sentiers et les actus du cirque au quotidien.</p>
-          </div>
-          <div class="grid grid-cols-3 gap-2">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1 transition">
-              <i data-lucide="instagram" class="w-4 h-4 text-pink-600"></i>
-              <span class="text-[11px]">Instagram</span>
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1 transition">
-              <i data-lucide="facebook" class="w-4 h-4 text-blue-600"></i>
-              <span class="text-[11px]">Facebook</span>
-            </a>
-            <a href="https://tripadvisor.fr" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-center text-xs font-bold text-slate-700 flex flex-col items-center justify-center space-y-1 transition">
-              <i data-lucide="award" class="w-4 h-4 text-emerald-600"></i>
-              <span class="text-[11px]">Tripadvisor</span>
-            </a>
-          </div>
-        </div>
-
-      <!-- CARROUSEL D'AVIS CLIENTS VÉRIFIÉS (POUR PRÉSENTATION BANQUE & PARTENAIRES) -->
-      <div class="space-y-3">
-        <div class="flex items-center justify-between px-1">
-          <div>
-            <h4 class="font-extrabold text-slate-900 text-sm sm:text-base">Retours & Témoignages Clients</h4>
-            <p class="text-xs text-slate-500">Avis vérifiés de randonneurs, curistes et résidents de Cilaos</p>
-          </div>
-          <span class="text-[11px] font-bold text-tecGreen-800 bg-emerald-100 px-3 py-1 rounded-full">
-            100% Recommandé
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-          
-          <!-- Avis 1 : Randonneur Piton des Neiges -->
-          <div class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-3">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2.5">
-                  <div class="w-9 h-9 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
-                    MR
-                  </div>
-                  <div>
-                    <h5 class="text-xs font-bold text-slate-900">Mathieu Rivière</h5>
-                    <p class="text-[10px] text-slate-400">Randonnée Piton des Neiges</p>
-                  </div>
-                </div>
-                <div class="flex text-amber-400">
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                </div>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed italic">
-                « La formule parking solaire + dépose au Bloc est un pur régal ! Voiture à l'ombre et en sécurité pendant 2 jours. Yannis est ponctuel, souriant et de très bon conseil pour le sentier. Incontournable ! »
-              </p>
-            </div>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
-              <span class="text-emerald-700 font-semibold flex items-center space-x-1">
-                <i data-lucide="check" class="w-3 h-3"></i>
-                <span>Avis certifié</span>
-              </span>
-              <span>Il y a 3 jours</span>
-            </div>
-          </div>
-
-          <!-- Avis 2 : Curiste Thermes de Cilaos -->
-          <div class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-3">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2.5">
-                  <div class="w-9 h-9 rounded-full bg-cyan-700 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
-                    FD
-                  </div>
-                  <div>
-                    <h5 class="text-xs font-bold text-slate-900">Françoise & Daniel</h5>
-                    <p class="text-[10px] text-slate-400">Curistes (3 semaines)</p>
-                  </div>
-                </div>
-                <div class="flex text-amber-400">
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                </div>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed italic">
-                « Nous venons en cure à Cilaos depuis 6 ans et c'est la 1ère fois que nous n'avons pas à nous soucier des pentes et du stationnement. Yannis vient nous chercher chaque matin au gîte. Chauffeur très attentionné ! »
-              </p>
-            </div>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
-              <span class="text-cyan-700 font-semibold flex items-center space-x-1">
-                <i data-lucide="check" class="w-3 h-3"></i>
-                <span>Forfait 21 Jours</span>
-              </span>
-              <span>Il y a 1 semaine</span>
-            </div>
-          </div>
-
-          <!-- Avis 3 : Événement / Mariage & Touriste -->
-          <div class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-3">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2.5">
-                  <div class="w-9 h-9 rounded-full bg-pink-600 text-white font-extrabold flex items-center justify-center text-xs shadow-xs">
-                    EL
-                  </div>
-                  <div>
-                    <h5 class="text-xs font-bold text-slate-900">Élodie & Lucas</h5>
-                    <p class="text-[10px] text-slate-400">Mariage & Cortège Cilaos</p>
-                  </div>
-                </div>
-                <div class="flex text-amber-400">
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                </div>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed italic">
-                « Le tuk-tuk floqué Tec-Tec décoré de fleurs locales pour notre mariage a fait sensation auprès de tous les invités ! Les photos avec les montagnes en arrière-plan sont magnifiques. Merci encore ! »
-              </p>
-            </div>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
-              <span class="text-pink-600 font-semibold flex items-center space-x-1">
-                <i data-lucide="check" class="w-3 h-3"></i>
-                <span>Prestation Événement</span>
-              </span>
-              <span>Il y a 2 semaines</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Footer : Liens Juridiques & Copyright -->
-      <footer class="pt-4 pb-2 text-center text-xs text-slate-400 space-y-2">
-        <div class="flex items-center justify-center space-x-3 text-slate-500 font-medium">
-          <button onclick="openLegalModal('mentions')" class="hover:text-tecGreen-700 underline underline-offset-4">Mentions Légales</button>
-          <span>•</span>
-          <button onclick="openLegalModal('privacy')" class="hover:text-tecGreen-700 underline underline-offset-4">Politique de Confidentialité</button>
-          <span>•</span>
-          <button onclick="openLegalModal('cgu')" class="hover:text-tecGreen-700 underline underline-offset-4">CGV / Transports</button>
-        </div>
-        <p class="text-[11px]">© 2026 Le Tec-Tec Tuk Tuk Cilaos. Mobilité éco-responsable & Parking Solaire.</p>
-      </footer>
-    </section>
+      <p class="text-[11px]">© 2026 Le Tec-Tec Tuk Tuk Cilaos. Mobilité éco-responsable & Parking Solaire.</p>
+    </footer>
 
   </main>
 
@@ -875,23 +893,99 @@
     </div>
   </div>
 
+  <!-- ================= MODULE FLOTTANT ANIMÉ CONTACT & ITINÉRAIRE (FAB) ================= -->
+  <div id="floatingQuickContact" class="fixed right-4 md:right-8 bottom-20 md:bottom-8 z-40 flex flex-col items-end space-y-2.5">
+    
+    <!-- Menu Déroulant d'Actions Rapides (Caché par défaut) -->
+    <div id="fabMenu" class="hidden flex flex-col items-end space-y-2 transition-all duration-300 transform scale-95 opacity-0 origin-bottom-right">
+      
+      <!-- Action 1 : WhatsApp Yannis -->
+      <a href="https://wa.me/262692000000?text=Bonjour%20Yannis%2C%20je%20souhaite%20une%20information%20ou%20un%20trajet%20Tec-Tec%20Tuk%20Tuk%20!" 
+         target="_blank" rel="noopener noreferrer"
+         class="group flex items-center space-x-2 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-emerald-100 hover:border-emerald-300 transition">
+        <span class="text-xs font-bold text-slate-700 group-hover:text-emerald-700">WhatsApp Yannis</span>
+        <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-md">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+        </div>
+      </a>
+
+      <!-- Action 2 : Appel Direct -->
+      <a href="tel:+262692000000" 
+         class="group flex items-center space-x-2 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-slate-200 hover:border-tecGreen-300 transition">
+        <span class="text-xs font-bold text-slate-700 group-hover:text-tecGreen-800">Appeler le Tuk-Tuk</span>
+        <div class="w-9 h-9 rounded-xl bg-tecGreen-700 text-white flex items-center justify-center shadow-md">
+          <i data-lucide="phone-call" class="w-4 h-4"></i>
+        </div>
+      </a>
+
+      <!-- Action 3 : Itinéraire Google Maps -->
+      <a href="https://www.google.com/maps/search/?api=1&query=1+Route+de+Bras-Sec+97413+Cilaos" 
+         target="_blank" rel="noopener noreferrer"
+         class="group flex items-center space-x-2 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-slate-200 hover:border-amber-300 transition">
+        <span class="text-xs font-bold text-slate-700 group-hover:text-amber-800">Itinéraire Hub (Bras-Sec)</span>
+        <div class="w-9 h-9 rounded-xl bg-slate-900 text-tecGold-400 flex items-center justify-center shadow-md">
+          <i data-lucide="navigation" class="w-4 h-4"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- Bouton Flottant Déclencheur avec Bulle d'Alerte & Pulsation -->
+    <div class="relative">
+      <!-- Badge de disponibilité pulsant -->
+      <span class="absolute -top-1.5 -left-1.5 flex h-4 w-4 z-10 pointer-events-none">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white"></span>
+      </span>
+
+      <!-- Petit tag "Besoin d'aide ?" visible au repos -->
+      <div id="fabHelperTag" class="hidden sm:flex absolute right-16 top-2.5 bg-slate-900/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap items-center space-x-1 backdrop-blur-xs pointer-events-none">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span>Yannis en direct</span>
+      </div>
+
+      <!-- Bouton Principal -->
+      <button id="fabMainBtn" onclick="toggleFabMenu()" 
+              class="fab-pulse w-14 h-14 md:w-16 md:h-16 rounded-2xl md:rounded-3xl bg-gradient-to-br from-tecGreen-600 via-tecGreen-700 to-tecGreen-900 text-white flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all">
+        <!-- Icône fermée (Bulle & Étoile) -->
+        <span id="fabIconOpen" class="flex items-center justify-center">
+          <i data-lucide="message-square" class="w-6 h-6 md:w-7 md:h-7 text-white"></i>
+        </span>
+        <!-- Icône ouverte (Croix) -->
+        <span id="fabIconClose" class="hidden items-center justify-center">
+          <i data-lucide="x" class="w-6 h-6 md:w-7 md:h-7 text-white"></i>
+        </span>
+      </button>
+    </div>
+
+  </div>
+
   <!-- ================= BARRE DE NAVIGATION INFÉRIEURE (Mobile uniquement) ================= -->
   <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2">
-    <div class="max-w-md mx-auto px-6 grid grid-cols-3 gap-1 text-center">
+    <div class="max-w-md mx-auto px-4 grid grid-cols-5 gap-1 text-center">
       
       <button onclick="changeTab('booking')" id="navBooking" class="flex flex-col items-center justify-center text-tecGreen-700 font-bold transition">
-        <i data-lucide="calendar-plus" class="w-5 h-5 mb-0.5"></i>
-        <span class="text-[10px]">Réserver</span>
+        <i data-lucide="calendar-plus" class="w-4 h-4 mb-0.5"></i>
+        <span class="text-[9px]">Réserver</span>
       </button>
 
       <button onclick="changeTab('hub')" id="navHub" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
-        <i data-lucide="sun" class="w-5 h-5 mb-0.5"></i>
-        <span class="text-[10px]">Hub Solaire</span>
+        <i data-lucide="sun" class="w-4 h-4 mb-0.5"></i>
+        <span class="text-[9px]">Hub</span>
+      </button>
+
+      <button onclick="changeTab('reviews')" id="navReviews" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
+        <i data-lucide="star" class="w-4 h-4 mb-0.5"></i>
+        <span class="text-[9px]">Avis</span>
+      </button>
+
+      <button onclick="changeTab('contact')" id="navContact" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
+        <i data-lucide="map-pin" class="w-4 h-4 mb-0.5"></i>
+        <span class="text-[9px]">Contact</span>
       </button>
 
       <button onclick="changeTab('orders')" id="navOrders" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
-        <i data-lucide="clock" class="w-5 h-5 mb-0.5"></i>
-        <span class="text-[10px]">Mes Trajets</span>
+        <i data-lucide="clock" class="w-4 h-4 mb-0.5"></i>
+        <span class="text-[9px]">Trajets</span>
       </button>
 
     </div>
@@ -902,6 +996,56 @@
     let currentService = 'tuktuk';
     let myBookings = [];
     let lastBookingData = null; // Pour l'export agenda
+
+    // Gestion du changement d'onglet (Navigation fluide)
+    function changeTab(tabName) {
+      // Masquer toutes les vues
+      const views = ['booking', 'hub', 'reviews', 'contact', 'orders'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) el.classList.add('hidden');
+      });
+
+      // Afficher la vue demandée
+      const activeView = document.getElementById(`view-${tabName}`);
+      if (activeView) activeView.classList.remove('hidden');
+
+      // Mise à jour de l'état des boutons Desktop
+      const desktopTabs = [
+        { id: 'navBookingDesktop', tab: 'booking' },
+        { id: 'navHubDesktop', tab: 'hub' },
+        { id: 'navReviewsDesktop', tab: 'reviews' },
+        { id: 'navContactDesktop', tab: 'contact' },
+        { id: 'navOrdersDesktop', tab: 'orders' }
+      ];
+
+      desktopTabs.forEach(item => {
+        const btn = document.getElementById(item.id);
+        if (btn) {
+          if (item.tab === tabName) {
+            btn.className = "px-3.5 py-1.5 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5";
+          } else {
+            btn.className = "px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5";
+          }
+        }
+      });
+
+      // Mise à jour de l'état des boutons Mobile
+      const mobileTabs = ['Booking', 'Hub', 'Reviews', 'Contact', 'Orders'];
+      mobileTabs.forEach(item => {
+        const btn = document.getElementById(`nav${item}`);
+        if (btn) {
+          if (item.toLowerCase() === tabName) {
+            btn.className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold transition";
+          } else {
+            btn.className = "flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition";
+          }
+        }
+      });
+
+      lucide.createIcons();
+    }
+
     // Bascule entre Tuk-Tuk, Curistes, Parking Solaire et Événements
     function switchService(service) {
       currentService = service;
@@ -1185,6 +1329,40 @@ END:VCALENDAR`;
 
     function closeLegalModal() {
       document.getElementById('legalModal').classList.add('hidden');
+    }
+
+    // Gestion du menu flottant animé (FAB Yannis & Itinéraire)
+    function toggleFabMenu() {
+      const menu = document.getElementById('fabMenu');
+      const iconOpen = document.getElementById('fabIconOpen');
+      const iconClose = document.getElementById('fabIconClose');
+      const helperTag = document.getElementById('fabHelperTag');
+      const fabBtn = document.getElementById('fabMainBtn');
+
+      const isHidden = menu.classList.contains('hidden');
+
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        setTimeout(() => {
+          menu.classList.remove('scale-95', 'opacity-0');
+          menu.classList.add('scale-100', 'opacity-100');
+        }, 10);
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        if (helperTag) helperTag.classList.add('hidden');
+        fabBtn.classList.remove('fab-pulse');
+      } else {
+        menu.classList.add('scale-95', 'opacity-0');
+        menu.classList.remove('scale-100', 'opacity-100');
+        setTimeout(() => {
+          menu.classList.add('hidden');
+        }, 200);
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        if (helperTag) helperTag.classList.remove('hidden');
+        fabBtn.classList.add('fab-pulse');
+      }
+      lucide.createIcons();
     }
 
     // Rendu de l'historique
