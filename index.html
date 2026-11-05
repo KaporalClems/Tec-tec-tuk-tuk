@@ -119,7 +119,7 @@
   <!-- ================= BARRE DU HAUT / HEADER ================= -->
   <header class="sticky top-0 z-30 bg-tecGreen-800 text-white shadow-md">
     <div class="max-w-6xl mx-auto px-4 lg:px-8 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="changeTab('booking')">
         <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white p-1 shadow flex items-center justify-center overflow-hidden shrink-0">
           <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tec%20tec%20logo.jpg" alt="Logo Tec-Tec" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/166534/ffffff?text=🛺';">
         </div>
@@ -130,24 +130,24 @@
       </div>
       
       <!-- Navigation Desktop & Tablette (visible dès md:) -->
-      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 bg-tecGreen-900/50 p-1.5 rounded-2xl border border-emerald-500/20 text-xs font-semibold">
-        <button onclick="changeTab('booking')" id="navBookingDesktop" class="px-3.5 py-1.5 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5">
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 bg-tecGreen-900/60 p-1.5 rounded-2xl border border-emerald-500/20 text-xs font-semibold">
+        <button onclick="changeTab('booking')" id="navBookingDesktop" class="px-3.5 py-2 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5 cursor-pointer">
           <i data-lucide="calendar-plus" class="w-4 h-4"></i>
           <span>Réserver</span>
         </button>
-        <button onclick="changeTab('hub')" id="navHubDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
+        <button onclick="changeTab('hub')" id="navHubDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer">
           <i data-lucide="sun" class="w-4 h-4"></i>
           <span>Hub Solaire & Yannis</span>
         </button>
-        <button onclick="changeTab('reviews')" id="navReviewsDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
+        <button onclick="changeTab('reviews')" id="navReviewsDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer">
           <i data-lucide="star" class="w-4 h-4"></i>
           <span>Avis Clients</span>
         </button>
-        <button onclick="changeTab('contact')" id="navContactDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
+        <button onclick="changeTab('contact')" id="navContactDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer">
           <i data-lucide="map-pin" class="w-4 h-4"></i>
           <span>Contact & Accès</span>
         </button>
-        <button onclick="changeTab('orders')" id="navOrdersDesktop" class="px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5">
+        <button onclick="changeTab('orders')" id="navOrdersDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer">
           <i data-lucide="clock" class="w-4 h-4"></i>
           <span>Mes Trajets</span>
         </button>
@@ -550,67 +550,83 @@
     <section id="view-hub" class="hidden space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0">
       
       <!-- Fiche Conducteur Yannis -->
-      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
-        <div class="flex items-center space-x-4">
-          <div class="w-20 h-20 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden shrink-0">
-            <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tuk-tuk%20tec-tec.jpeg" alt="Tuk-Tuk Cilaos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/166534/ffffff?text=Yannis';">
-          </div>
-          <div>
-            <div class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-              <span>Conducteur Officiel Homologué</span>
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4">
+            <div class="w-20 h-20 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden shrink-0">
+              <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tuk-tuk%20tec-tec.jpeg" alt="Tuk-Tuk Cilaos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/166534/ffffff?text=Yannis';">
             </div>
-            <h3 class="font-extrabold text-slate-900 text-lg">Yannis</h3>
-            <p class="text-xs sm:text-sm text-slate-500">Chauffeur professionnel & accompagnateur</p>
+            <div>
+              <div class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                <span>Conducteur Officiel Homologué</span>
+              </div>
+              <h3 class="font-extrabold text-slate-900 text-lg">Yannis</h3>
+              <p class="text-xs sm:text-sm text-slate-500">Chauffeur professionnel & accompagnateur</p>
+            </div>
           </div>
-        </div>
-        
-        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
-          "Bienvenue à Cilaos ! Équipé de ma tenue professionnelle officielle Tec-Tec, je vous conduis avec passion vers les départs de randonnée et vous partage l'histoire de nos îlets emblématiques."
-        </p>
+          
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            "Bienvenue à Cilaos ! Équipé de ma tenue professionnelle officielle Tec-Tec, je vous conduis avec passion vers les départs de randonnée et vous partage l'histoire de nos îlets emblématiques."
+          </p>
 
-        <div class="grid grid-cols-2 gap-2 text-center text-xs">
-          <div class="p-3 bg-emerald-50 rounded-xl font-semibold text-emerald-900">
-            ⚡ Conduite douce
-          </div>
-          <div class="p-3 bg-amber-50 rounded-xl font-semibold text-amber-900">
-            🎒 Porte-sacs rando
+          <div class="grid grid-cols-2 gap-2 text-center text-xs">
+            <div class="p-3 bg-emerald-50 rounded-xl font-semibold text-emerald-900 flex items-center justify-center space-x-1.5">
+              <i data-lucide="shield" class="w-3.5 h-3.5 text-emerald-600"></i>
+              <span>Conduite douce</span>
+            </div>
+            <div class="p-3 bg-amber-50 rounded-xl font-semibold text-amber-900 flex items-center justify-center space-x-1.5">
+              <i data-lucide="backpack" class="w-3.5 h-3.5 text-amber-600"></i>
+              <span>Porte-sacs rando</span>
+            </div>
           </div>
         </div>
+
+        <button onclick="changeTab('booking')" class="w-full py-3 bg-tecGreen-700 hover:bg-tecGreen-800 text-white font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition cursor-pointer">
+          <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+          <span>Réserver une course avec Yannis</span>
+        </button>
       </div>
 
       <!-- Données Live du Hub Solaire -->
-      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
-        <h4 class="font-bold text-xs uppercase tracking-wider text-slate-600 flex items-center space-x-2">
-          <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
-          <span>Hub Solaire & Container Autonome</span>
-        </h4>
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+        <div class="space-y-4">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-slate-600 flex items-center space-x-2">
+            <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
+            <span>Hub Solaire & Container Autonome</span>
+          </h4>
 
-        <div class="grid grid-cols-2 gap-3">
-          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-            <span class="text-xs text-slate-400">Autonomie Flotte</span>
-            <div class="flex items-center space-x-1.5 mt-1.5">
-              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-              <span class="font-black text-slate-800 text-base sm:text-lg">98 %</span>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+              <span class="text-xs text-slate-400">Autonomie Flotte</span>
+              <div class="flex items-center space-x-1.5 mt-1.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span class="font-black text-slate-800 text-base sm:text-lg">98 %</span>
+              </div>
+              <span class="text-[11px] text-slate-400">Recharge 100% solaire</span>
             </div>
-            <span class="text-[11px] text-slate-400">Recharge 100% solaire</span>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+              <span class="text-xs text-slate-400">Places Parking Libres</span>
+              <div class="flex items-center space-x-1.5 mt-1.5">
+                <span class="font-black text-tecGreen-700 text-base sm:text-lg">6 / 15</span>
+              </div>
+              <span class="text-[11px] text-slate-400">Ombrières sécurisées</span>
+            </div>
           </div>
 
-          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-            <span class="text-xs text-slate-400">Places Parking Libres</span>
-            <div class="flex items-center space-x-1.5 mt-1.5">
-              <span class="font-black text-tecGreen-700 text-base sm:text-lg">6 / 15</span>
-            </div>
-            <span class="text-[11px] text-slate-400">Ombrières sécurisées</span>
+          <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-900 flex items-center space-x-3">
+            <i data-lucide="leaf" class="w-6 h-6 text-tecGreen-700 shrink-0"></i>
+            <p class="leading-relaxed">
+              <strong>0 gramme de CO₂ émis :</strong> Véhicules et batteries rechargés localement grâce à l'énergie solaire du cirque de Cilaos.
+            </p>
           </div>
         </div>
 
-        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-900 flex items-center space-x-3">
-          <i data-lucide="leaf" class="w-6 h-6 text-tecGreen-700 shrink-0"></i>
-          <p class="leading-relaxed">
-            <strong>0 gramme de CO₂ émis :</strong> Véhicules et batteries rechargés localement grâce à l'énergie solaire du cirque de Cilaos.
-          </p>
-        </div>
+        <button onclick="changeTab('contact')" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition cursor-pointer">
+          <i data-lucide="map-pin" class="w-4 h-4 text-tecGold-400"></i>
+          <span>Voir l'emplacement du Hub à Bras-Sec</span>
+        </button>
       </div>
     </section>
 
@@ -997,7 +1013,7 @@
     let myBookings = [];
     let lastBookingData = null; // Pour l'export agenda
 
-    // Gestion du changement d'onglet (Navigation fluide)
+    // Gestion du changement d'onglet (Navigation fluide par en-tête)
     function changeTab(tabName) {
       // Masquer toutes les vues
       const views = ['booking', 'hub', 'reviews', 'contact', 'orders'];
@@ -1008,9 +1024,14 @@
 
       // Afficher la vue demandée
       const activeView = document.getElementById(`view-${tabName}`);
-      if (activeView) activeView.classList.remove('hidden');
+      if (activeView) {
+        activeView.classList.remove('hidden');
+        // Remonter en haut de l'écran lors du changement
+        const mainEl = document.querySelector('main');
+        if (mainEl) mainEl.scrollTop = 0;
+      }
 
-      // Mise à jour de l'état des boutons Desktop
+      // Mise à jour visuelle des boutons Desktop (En-tête vert)
       const desktopTabs = [
         { id: 'navBookingDesktop', tab: 'booking' },
         { id: 'navHubDesktop', tab: 'hub' },
@@ -1023,14 +1044,14 @@
         const btn = document.getElementById(item.id);
         if (btn) {
           if (item.tab === tabName) {
-            btn.className = "px-3.5 py-1.5 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5";
+            btn.className = "px-3.5 py-2 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5 cursor-pointer font-bold";
           } else {
-            btn.className = "px-3.5 py-1.5 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5";
+            btn.className = "px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer font-semibold";
           }
         }
       });
 
-      // Mise à jour de l'état des boutons Mobile
+      // Mise à jour visuelle des boutons Mobile (Barre inférieure)
       const mobileTabs = ['Booking', 'Hub', 'Reviews', 'Contact', 'Orders'];
       mobileTabs.forEach(item => {
         const btn = document.getElementById(`nav${item}`);
