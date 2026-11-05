@@ -51,6 +51,9 @@
       overscroll-behavior-y: none;
       -webkit-tap-highlight-color: transparent;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     .hide-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -116,10 +119,10 @@
     </div>
   </div>
 
-  <!-- ================= BARRE DU HAUT / HEADER ================= -->
-  <header class="sticky top-0 z-30 bg-tecGreen-800 text-white shadow-md">
-    <div class="max-w-6xl mx-auto px-4 lg:px-8 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="changeTab('booking')">
+  <!-- ================= BARRE DU HAUT / HEADER FIXE ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-tecGreen-800/95 backdrop-blur-md text-white shadow-lg border-b border-emerald-900/40 transition-all">
+    <div class="max-w-6xl mx-auto px-4 lg:px-8 py-2.5 md:py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('section-booking')">
         <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white p-1 shadow flex items-center justify-center overflow-hidden shrink-0">
           <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tec%20tec%20logo.jpg" alt="Logo Tec-Tec" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/166534/ffffff?text=🛺';">
         </div>
@@ -130,24 +133,24 @@
       </div>
       
       <!-- Navigation Desktop & Tablette (visible dès md:) -->
-      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 bg-tecGreen-900/60 p-1.5 rounded-2xl border border-emerald-500/20 text-xs font-semibold">
-        <button onclick="changeTab('booking')" id="navBookingDesktop" class="px-3.5 py-2 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5 cursor-pointer">
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 bg-tecGreen-900/70 backdrop-blur-xs p-1.5 rounded-2xl border border-emerald-500/20 text-xs font-semibold">
+        <button onclick="scrollToSection('section-booking')" id="navBookingDesktop" class="px-3.5 py-2 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5 cursor-pointer font-bold">
           <i data-lucide="calendar-plus" class="w-4 h-4"></i>
           <span>Réserver</span>
         </button>
-        <button onclick="changeTab('hub')" id="navHubDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer">
+        <button onclick="scrollToSection('section-hub')" id="navHubDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer font-semibold">
           <i data-lucide="sun" class="w-4 h-4"></i>
           <span>Hub Solaire & Yannis</span>
         </button>
-        <button onclick="changeTab('reviews')" id="navReviewsDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer">
+        <button onclick="scrollToSection('section-reviews')" id="navReviewsDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer font-semibold">
           <i data-lucide="star" class="w-4 h-4"></i>
           <span>Avis Clients</span>
         </button>
-        <button onclick="changeTab('contact')" id="navContactDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer">
+        <button onclick="scrollToSection('section-contact')" id="navContactDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer font-semibold">
           <i data-lucide="map-pin" class="w-4 h-4"></i>
           <span>Contact & Accès</span>
         </button>
-        <button onclick="changeTab('orders')" id="navOrdersDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer">
+        <button onclick="scrollToSection('section-orders')" id="navOrdersDesktop" class="px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer font-semibold">
           <i data-lucide="clock" class="w-4 h-4"></i>
           <span>Mes Trajets</span>
         </button>
@@ -171,10 +174,11 @@
   </header>
 
   <!-- ================= CONTENU PRINCIPAL (ÉCRANS) ================= -->
-  <main class="flex-1 max-w-6xl w-full mx-auto pb-24 md:pb-6 overflow-y-auto hide-scrollbar px-3 sm:px-6 lg:px-8 pt-4 md:pt-6">
+  <!-- pt-20 sur mobile et pt-24 sur md: pour compenser la hauteur du header fixe -->
+  <main class="flex-1 max-w-6xl w-full mx-auto pb-24 md:pb-8 overflow-y-auto hide-scrollbar px-3 sm:px-6 lg:px-8 pt-20 md:pt-24 space-y-12">
 
-    <!-- ========== VUE 1 : RÉSERVATION (ACCUEIL) ========== -->
-    <section id="view-booking" class="space-y-4 md:space-y-0 md:grid md:grid-cols-12 md:gap-6 lg:gap-8 items-start">
+    <!-- ========== SECTION 1 : RÉSERVATION (ACCUEIL) ========== -->
+    <section id="section-booking" class="scroll-mt-24 grid grid-cols-1 md:grid-cols-12 gap-6">
       
       <!-- Colonne Gauche (Desktop / Tablette) : Bannière + Aperçu dynamique -->
       <div class="md:col-span-5 lg:col-span-5 space-y-4">
@@ -224,19 +228,19 @@
         
         <!-- SÉLECTEUR DE SERVICE : TUK-TUK, CURISTES, PARKING SOLAIRE OU ÉVÉNEMENTS -->
         <div class="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-4 gap-1 text-center font-bold text-[10px] sm:text-xs md:text-sm">
-          <button id="tabTuktuk" onclick="switchService('tuktuk')" class="py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1">
+          <button id="tabTuktuk" type="button" onclick="switchService('tuktuk')" class="py-2.5 rounded-xl transition bg-tecGreen-700 text-white shadow-sm flex items-center justify-center space-x-1">
             <i data-lucide="zap" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
             <span>Navette</span>
           </button>
-          <button id="tabCuriste" onclick="switchService('curiste')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
+          <button id="tabCuriste" type="button" onclick="switchService('curiste')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
             <i data-lucide="heart-pulse" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-600"></i>
             <span>Curistes</span>
           </button>
-          <button id="tabParking" onclick="switchService('parking')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
+          <button id="tabParking" type="button" onclick="switchService('parking')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
             <i data-lucide="shield-check" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
             <span>Parking</span>
           </button>
-          <button id="tabEvents" onclick="switchService('events')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
+          <button id="tabEvents" type="button" onclick="switchService('events')" class="py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 flex items-center justify-center space-x-1">
             <i data-lucide="sparkles" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-tecGold-500"></i>
             <span>Événement</span>
           </button>
@@ -538,92 +542,103 @@
       </div>
     </section>
 
-    <!-- ========== VUE 2 : LE HUB & INFOS YANNIS ========== -->
-    <section id="view-hub" class="hidden space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0">
-      
-      <!-- Fiche Conducteur Yannis -->
-      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
-        <div class="space-y-4">
-          <div class="flex items-center space-x-4">
-            <div class="w-20 h-20 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden shrink-0">
-              <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tuk-tuk%20tec-tec.jpeg" alt="Tuk-Tuk Cilaos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/166534/ffffff?text=Yannis';">
-            </div>
-            <div>
-              <div class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-                <span>Conducteur Officiel Homologué</span>
-              </div>
-              <h3 class="font-extrabold text-slate-900 text-lg">Yannis</h3>
-              <p class="text-xs sm:text-sm text-slate-500">Chauffeur professionnel & accompagnateur</p>
-            </div>
-          </div>
-          
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
-            "Bienvenue à Cilaos ! Équipé de ma tenue professionnelle officielle Tec-Tec, je vous conduis avec passion vers les départs de randonnée et vous partage l'histoire de nos îlets emblématiques."
-          </p>
-
-          <div class="grid grid-cols-2 gap-2 text-center text-xs">
-            <div class="p-3 bg-emerald-50 rounded-xl font-semibold text-emerald-900 flex items-center justify-center space-x-1.5">
-              <i data-lucide="shield" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span>Conduite douce</span>
-            </div>
-            <div class="p-3 bg-amber-50 rounded-xl font-semibold text-amber-900 flex items-center justify-center space-x-1.5">
-              <i data-lucide="backpack" class="w-3.5 h-3.5 text-amber-600"></i>
-              <span>Porte-sacs rando</span>
-            </div>
-          </div>
-        </div>
-
-        <button onclick="changeTab('booking')" class="w-full py-3 bg-tecGreen-700 hover:bg-tecGreen-800 text-white font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition cursor-pointer">
-          <i data-lucide="calendar-plus" class="w-4 h-4"></i>
-          <span>Réserver une course avec Yannis</span>
-        </button>
+    <!-- ========== SECTION 2 : LE HUB & INFOS YANNIS ========== -->
+    <section id="section-hub" class="scroll-mt-24 space-y-4">
+      <div class="flex items-center space-x-2 pb-1 border-b border-slate-200">
+        <i data-lucide="sun" class="w-5 h-5 text-amber-500"></i>
+        <h3 class="text-lg font-bold text-slate-900">Le Hub Solaire & Votre Chauffeur</h3>
       </div>
-
-      <!-- Données Live du Hub Solaire -->
-      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
-        <div class="space-y-4">
-          <h4 class="font-bold text-xs uppercase tracking-wider text-slate-600 flex items-center space-x-2">
-            <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
-            <span>Hub Solaire & Container Autonome</span>
-          </h4>
-
-          <div class="grid grid-cols-2 gap-3">
-            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-              <span class="text-xs text-slate-400">Autonomie Flotte</span>
-              <div class="flex items-center space-x-1.5 mt-1.5">
-                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                <span class="font-black text-slate-800 text-base sm:text-lg">98 %</span>
+      
+      <div class="space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0">
+        <!-- Fiche Conducteur Yannis -->
+        <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <div class="flex items-center space-x-4">
+              <div class="w-20 h-20 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden shrink-0">
+                <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tuk-tuk%20tec-tec.jpeg" alt="Tuk-Tuk Cilaos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/166534/ffffff?text=Yannis';">
               </div>
-              <span class="text-[11px] text-slate-400">Recharge 100% solaire</span>
-            </div>
-
-            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-              <span class="text-xs text-slate-400">Places Parking Libres</span>
-              <div class="flex items-center space-x-1.5 mt-1.5">
-                <span class="font-black text-tecGreen-700 text-base sm:text-lg">6 / 15</span>
+              <div>
+                <div class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1">
+                  <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                  <span>Conducteur Officiel Homologué</span>
+                </div>
+                <h3 class="font-extrabold text-slate-900 text-lg">Yannis</h3>
+                <p class="text-xs sm:text-sm text-slate-500">Chauffeur professionnel & accompagnateur</p>
               </div>
-              <span class="text-[11px] text-slate-400">Ombrières sécurisées</span>
             </div>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-900 flex items-center space-x-3">
-            <i data-lucide="leaf" class="w-6 h-6 text-tecGreen-700 shrink-0"></i>
-            <p class="leading-relaxed">
-              <strong>0 gramme de CO₂ émis :</strong> Véhicules et batteries rechargés localement grâce à l'énergie solaire du cirque de Cilaos.
+            
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
+              "Bienvenue à Cilaos ! Équipé de ma tenue professionnelle officielle Tec-Tec, je vous conduis avec passion vers les départs de randonnée et vous partage l'histoire de nos îlets emblématiques."
             </p>
+
+            <div class="grid grid-cols-2 gap-2 text-center text-xs">
+              <div class="p-3 bg-emerald-50 rounded-xl font-semibold text-emerald-900 flex items-center justify-center space-x-1.5">
+                <i data-lucide="shield" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Conduite douce</span>
+              </div>
+              <div class="p-3 bg-amber-50 rounded-xl font-semibold text-amber-900 flex items-center justify-center space-x-1.5">
+                <i data-lucide="backpack" class="w-3.5 h-3.5 text-amber-600"></i>
+                <span>Porte-sacs rando</span>
+              </div>
+            </div>
           </div>
+
+          <button onclick="scrollToSection('section-booking')" class="w-full py-3 bg-tecGreen-700 hover:bg-tecGreen-800 text-white font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition cursor-pointer">
+            <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+            <span>Réserver une course avec Yannis</span>
+          </button>
         </div>
 
-        <button onclick="changeTab('contact')" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition cursor-pointer">
-          <i data-lucide="map-pin" class="w-4 h-4 text-tecGold-400"></i>
-          <span>Voir l'emplacement du Hub à Bras-Sec</span>
-        </button>
+        <!-- Données Live du Hub Solaire -->
+        <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-600 flex items-center space-x-2">
+              <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
+              <span>Hub Solaire & Container Autonome</span>
+            </h4>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span class="text-xs text-slate-400">Autonomie Flotte</span>
+                <div class="flex items-center space-x-1.5 mt-1.5">
+                  <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                  <span class="font-black text-slate-800 text-base sm:text-lg">98 %</span>
+                </div>
+                <span class="text-[11px] text-slate-400">Recharge 100% solaire</span>
+              </div>
+
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span class="text-xs text-slate-400">Places Parking Libres</span>
+                <div class="flex items-center space-x-1.5 mt-1.5">
+                  <span class="font-black text-tecGreen-700 text-base sm:text-lg">6 / 15</span>
+                </div>
+                <span class="text-[11px] text-slate-400">Ombrières sécurisées</span>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-900 flex items-center space-x-3">
+              <i data-lucide="leaf" class="w-6 h-6 text-tecGreen-700 shrink-0"></i>
+              <p class="leading-relaxed">
+                <strong>0 gramme de CO₂ émis :</strong> Véhicules et batteries rechargés localement grâce à l'énergie solaire du cirque de Cilaos.
+              </p>
+            </div>
+          </div>
+
+          <button onclick="scrollToSection('section-contact')" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition cursor-pointer">
+            <i data-lucide="map-pin" class="w-4 h-4 text-tecGold-400"></i>
+            <span>Voir l'emplacement du Hub à Bras-Sec</span>
+          </button>
+        </div>
       </div>
     </section>
 
-    <!-- ========== VUE NOUVELLE : AVIS CLIENTS ========== -->
-    <section id="view-reviews" class="hidden space-y-6">
+    <!-- ========== SECTION 3 : AVIS CLIENTS ========== -->
+    <section id="section-reviews" class="scroll-mt-24 space-y-4">
+      <div class="flex items-center space-x-2 pb-1 border-b border-slate-200">
+        <i data-lucide="star" class="w-5 h-5 text-amber-500"></i>
+        <h3 class="text-lg font-bold text-slate-900">Avis & Retours d'Expérience</h3>
+      </div>
+
       <!-- Bloc Résumé des Avis -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-gradient-to-br from-amber-50 to-orange-50/60 rounded-3xl p-5 md:p-6 border border-amber-200/70">
         <div class="md:col-span-8 space-y-2">
@@ -635,7 +650,7 @@
             <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
             <span class="text-sm font-black text-amber-900 ml-2">4.9 / 5 sur 68 avis vérifiés</span>
           </div>
-          <h3 class="text-lg font-bold text-slate-900">La référence transport & gardiennage à Cilaos</h3>
+          <h4 class="text-base font-bold text-slate-900">La référence transport & gardiennage à Cilaos</h4>
           <p class="text-xs text-slate-600">Recommandé par les randonneurs du Piton des Neiges, les curistes et les gîtes du cirque.</p>
         </div>
         <div class="md:col-span-4 flex justify-end">
@@ -752,8 +767,13 @@
       </div>
     </section>
 
-    <!-- ========== VUE NOUVELLE : CONTACT, ACCÈS & RÉSEAUX ========== -->
-    <section id="view-contact" class="hidden space-y-6">
+    <!-- ========== SECTION 4 : CONTACT, ACCÈS & RÉSEAUX ========== -->
+    <section id="section-contact" class="scroll-mt-24 space-y-4">
+      <div class="flex items-center space-x-2 pb-1 border-b border-slate-200">
+        <i data-lucide="map-pin" class="w-5 h-5 text-tecGreen-700"></i>
+        <h3 class="text-lg font-bold text-slate-900">Nous Contacter & Nous Rejoindre</h3>
+      </div>
+
       <!-- Carte Contact & Itinéraire Google Maps -->
       <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/80">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -762,7 +782,7 @@
               <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
               <span>Hub Principal & Parking Solaire</span>
             </span>
-            <h3 class="font-extrabold text-slate-900 text-xl">Tec-Tec Tuk Tuk Cilaos</h3>
+            <h4 class="font-extrabold text-slate-900 text-xl">Tec-Tec Tuk Tuk Cilaos</h4>
             <p class="text-sm text-slate-600">1 Route de Bras-Sec, 97413 Cilaos, Île de La Réunion</p>
             <div class="flex flex-wrap items-center gap-4 pt-1 text-sm text-slate-600">
               <a href="tel:+262692000000" class="hover:text-tecGreen-700 font-bold flex items-center space-x-1.5">
@@ -815,11 +835,14 @@
       </div>
     </section>
 
-    <!-- ========== VUE 3 : MES RÉSERVATIONS / HISTORIQUE ========== -->
-    <section id="view-orders" class="hidden space-y-4 max-w-2xl mx-auto">
-      <div class="flex items-center justify-between">
-        <h3 class="font-extrabold text-base text-slate-900">Mes Demandes & Trajets</h3>
-        <span id="orderCountBadge" class="text-xs bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded-full font-bold">0</span>
+    <!-- ========== SECTION 5 : MES RÉSERVATIONS / HISTORIQUE ========== -->
+    <section id="section-orders" class="scroll-mt-24 space-y-4">
+      <div class="flex items-center justify-between pb-1 border-b border-slate-200">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="clock" class="w-5 h-5 text-tecGreen-700"></i>
+          <h3 class="text-lg font-bold text-slate-900">Mes Demandes & Trajets</h3>
+        </div>
+        <span id="orderCountBadge" class="text-xs bg-emerald-100 text-tecGreen-800 px-3 py-1 rounded-full font-bold">0</span>
       </div>
 
       <div id="bookingList" class="space-y-2.5">
@@ -830,14 +853,14 @@
       </div>
     </section>
 
-    <!-- Footer : Liens Juridiques & Copyright (Toujours visible et compact) -->
-    <footer class="mt-8 pt-4 pb-2 text-center text-xs text-slate-400 space-y-2 border-t border-slate-200/60">
+    <!-- Footer : Liens Juridiques & Copyright -->
+    <footer class="mt-8 pt-6 pb-2 text-center text-xs text-slate-400 space-y-2 border-t border-slate-200/60">
       <div class="flex items-center justify-center space-x-3 text-slate-500 font-medium">
-        <button onclick="openLegalModal('mentions')" class="hover:text-tecGreen-700 underline underline-offset-4">Mentions Légales</button>
+        <button onclick="openLegalModal('mentions')" class="hover:text-tecGreen-700 underline underline-offset-4 cursor-pointer">Mentions Légales</button>
         <span>•</span>
-        <button onclick="openLegalModal('privacy')" class="hover:text-tecGreen-700 underline underline-offset-4">Politique de Confidentialité</button>
+        <button onclick="openLegalModal('privacy')" class="hover:text-tecGreen-700 underline underline-offset-4 cursor-pointer">Politique de Confidentialité</button>
         <span>•</span>
-        <button onclick="openLegalModal('cgu')" class="hover:text-tecGreen-700 underline underline-offset-4">CGV / Transports</button>
+        <button onclick="openLegalModal('cgu')" class="hover:text-tecGreen-700 underline underline-offset-4 cursor-pointer">CGV / Transports</button>
       </div>
       <p class="text-[11px]">© 2026 Le Tec-Tec Tuk Tuk Cilaos. Mobilité éco-responsable & Parking Solaire.</p>
     </footer>
@@ -971,27 +994,27 @@
   <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2">
     <div class="max-w-md mx-auto px-4 grid grid-cols-5 gap-1 text-center">
       
-      <button onclick="changeTab('booking')" id="navBooking" class="flex flex-col items-center justify-center text-tecGreen-700 font-bold transition">
+      <button onclick="scrollToSection('section-booking')" id="navBooking" class="flex flex-col items-center justify-center text-tecGreen-700 font-bold transition">
         <i data-lucide="calendar-plus" class="w-4 h-4 mb-0.5"></i>
         <span class="text-[9px]">Réserver</span>
       </button>
 
-      <button onclick="changeTab('hub')" id="navHub" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
+      <button onclick="scrollToSection('section-hub')" id="navHub" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
         <i data-lucide="sun" class="w-4 h-4 mb-0.5"></i>
         <span class="text-[9px]">Hub</span>
       </button>
 
-      <button onclick="changeTab('reviews')" id="navReviews" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
+      <button onclick="scrollToSection('section-reviews')" id="navReviews" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
         <i data-lucide="star" class="w-4 h-4 mb-0.5"></i>
         <span class="text-[9px]">Avis</span>
       </button>
 
-      <button onclick="changeTab('contact')" id="navContact" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
+      <button onclick="scrollToSection('section-contact')" id="navContact" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
         <i data-lucide="map-pin" class="w-4 h-4 mb-0.5"></i>
         <span class="text-[9px]">Contact</span>
       </button>
 
-      <button onclick="changeTab('orders')" id="navOrders" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
+      <button onclick="scrollToSection('section-orders')" id="navOrders" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition">
         <i data-lucide="clock" class="w-4 h-4 mb-0.5"></i>
         <span class="text-[9px]">Trajets</span>
       </button>
@@ -1005,37 +1028,44 @@
     let myBookings = [];
     let lastBookingData = null; // Pour l'export agenda
 
-    // Gestion du changement d'onglet (Navigation fluide par en-tête)
+    // Alias de compatibilité
     function changeTab(tabName) {
-      // Masquer toutes les vues
-      const views = ['booking', 'hub', 'reviews', 'contact', 'orders'];
-      views.forEach(v => {
-        const el = document.getElementById(`view-${v}`);
-        if (el) el.classList.add('hidden');
-      });
+      const map = {
+        'booking': 'section-booking',
+        'hub': 'section-hub',
+        'reviews': 'section-reviews',
+        'contact': 'section-contact',
+        'orders': 'section-orders'
+      };
+      scrollToSection(map[tabName] || 'section-booking');
+    }
 
-      // Afficher la vue demandée
-      const activeView = document.getElementById(`view-${tabName}`);
-      if (activeView) {
-        activeView.classList.remove('hidden');
-        // Remonter en haut de l'écran lors du changement
-        const mainEl = document.querySelector('main');
-        if (mainEl) mainEl.scrollTop = 0;
+    // Défilement fluide vers une section ciblée
+    function scrollToSection(sectionId) {
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        highlightNavTab(sectionId);
       }
+    }
 
-      // Mise à jour visuelle des boutons Desktop (En-tête vert)
-      const desktopTabs = [
-        { id: 'navBookingDesktop', tab: 'booking' },
-        { id: 'navHubDesktop', tab: 'hub' },
-        { id: 'navReviewsDesktop', tab: 'reviews' },
-        { id: 'navContactDesktop', tab: 'contact' },
-        { id: 'navOrdersDesktop', tab: 'orders' }
-      ];
+    // Mise en valeur de l'onglet actif dans la barre de navigation
+    function highlightNavTab(sectionId) {
+      const mapping = {
+        'section-booking': 'Booking',
+        'section-hub': 'Hub',
+        'section-reviews': 'Reviews',
+        'section-contact': 'Contact',
+        'section-orders': 'Orders'
+      };
 
-      desktopTabs.forEach(item => {
-        const btn = document.getElementById(item.id);
+      const activeKey = mapping[sectionId] || 'Booking';
+
+      // Boutons Desktop (En-tête vert)
+      ['Booking', 'Hub', 'Reviews', 'Contact', 'Orders'].forEach(key => {
+        const btn = document.getElementById(`nav${key}Desktop`);
         if (btn) {
-          if (item.tab === tabName) {
+          if (key === activeKey) {
             btn.className = "px-3.5 py-2 rounded-xl bg-white text-tecGreen-800 shadow-sm transition flex items-center space-x-1.5 cursor-pointer font-bold";
           } else {
             btn.className = "px-3.5 py-2 rounded-xl text-emerald-100 hover:text-white hover:bg-white/10 transition flex items-center space-x-1.5 cursor-pointer font-semibold";
@@ -1043,20 +1073,38 @@
         }
       });
 
-      // Mise à jour visuelle des boutons Mobile (Barre inférieure)
-      const mobileTabs = ['Booking', 'Hub', 'Reviews', 'Contact', 'Orders'];
-      mobileTabs.forEach(item => {
-        const btn = document.getElementById(`nav${item}`);
+      // Boutons Mobile (Barre inférieure)
+      ['Booking', 'Hub', 'Reviews', 'Contact', 'Orders'].forEach(key => {
+        const btn = document.getElementById(`nav${key}`);
         if (btn) {
-          if (item.toLowerCase() === tabName) {
+          if (key === activeKey) {
             btn.className = "flex flex-col items-center justify-center text-tecGreen-700 font-bold transition";
           } else {
             btn.className = "flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 font-medium transition";
           }
         }
       });
+    }
 
-      lucide.createIcons();
+    // Détection automatique de la section visible au défilement (Scroll Spy)
+    function setupScrollSpy() {
+      const sections = ['section-booking', 'section-hub', 'section-reviews', 'section-contact', 'section-orders'];
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            highlightNavTab(entry.target.id);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
     }
 
     // Bascule entre Tuk-Tuk, Curistes, Parking Solaire et Événements
@@ -1465,6 +1513,7 @@ END:VCALENDAR`;
       renderBookings();
       lucide.createIcons();
       initSplashVideo();
+      setupScrollSpy();
     };
 
     // Gestion du Splash Screen Vidéo
