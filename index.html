@@ -58,9 +58,50 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+    /* Transition de sortie fluide pour le splash screen */
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease-out;
+    }
   </style>
 </head>
 <body class="h-full font-sans text-slate-800 bg-slate-100 flex flex-col justify-between select-none">
+
+  <!-- ================= SPLASH SCREEN VIDÉO AU LANCEMENT ================= -->
+  <div id="videoSplash" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-between text-white transition-opacity duration-700">
+    <!-- Vidéo de fond en plein écran -->
+    <div class="absolute inset-0 overflow-hidden">
+      <video id="splashVideo" autoplay muted playsinline class="w-full h-full object-cover">
+        <source src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/3c08fd00d0c759b2eaf2abc718a3bb9192b3410e/tec%20tec.mp4" type="video/mp4">
+        Votre navigateur ne prend pas en charge la lecture vidéo.
+      </video>
+      <!-- Dégradé sombre pour garantir la lisibilité -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/60 pointer-events-none"></div>
+    </div>
+
+    <!-- En-tête du Splash -->
+    <div class="relative z-10 pt-8 flex flex-col items-center space-y-2">
+      <div class="w-16 h-16 rounded-3xl bg-white/95 p-1.5 shadow-2xl backdrop-blur-md flex items-center justify-center">
+        <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tec%20tec%20logo.jpg" alt="Logo Tec-Tec" class="w-full h-full object-contain">
+      </div>
+      <h2 class="text-xl font-extrabold tracking-tight drop-shadow-md">Le Tec-Tec Tuk Tuk</h2>
+      <p class="text-xs text-emerald-300 font-semibold tracking-wider uppercase">Cilaos • 100% Solaire</p>
+    </div>
+
+    <!-- Bas du Splash avec progression et bouton Passer -->
+    <div class="relative z-10 w-full max-w-sm px-6 pb-8 space-y-4 text-center">
+      <!-- Barre de chargement / progression -->
+      <div class="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
+        <div id="splashProgressBar" class="h-full bg-emerald-400 w-0 transition-all duration-300"></div>
+      </div>
+      
+      <button onclick="dismissSplashScreen()" class="w-full py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold text-sm shadow-xl flex items-center justify-center space-x-2 backdrop-blur-sm transition">
+        <span>Entrer dans l'application</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </div>
 
   <!-- ================= BARRE DU HAUT / HEADER ================= -->
   <header class="sticky top-0 z-30 bg-tecGreen-800 text-white shadow-md">
@@ -91,8 +132,11 @@
         </button>
       </nav>
 
-      <!-- Actions Droite (Badge + Bouton Install) -->
+      <!-- Actions Droite (Bouton Rejouer Vidéo + Badge + Bouton Install) -->
       <div class="flex items-center space-x-2">
+        <button onclick="replayIntroVideo()" title="Rejouer l'intro vidéo" class="p-2 rounded-xl bg-tecGreen-900/60 hover:bg-tecGreen-900 border border-emerald-500/30 text-emerald-200 hover:text-white transition flex items-center">
+          <i data-lucide="play" class="w-3.5 h-3.5"></i>
+        </button>
         <button id="pwaInstallBtn" class="hidden text-xs bg-tecGold-500 hover:bg-tecGold-600 text-slate-900 font-bold px-3 py-1.5 rounded-xl shadow flex items-center space-x-1.5 transition">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
           <span class="hidden sm:inline">Installer l'app</span>
@@ -696,7 +740,56 @@
       calculateTotal();
       renderBookings();
       lucide.createIcons();
+      initSplashVideo();
     };
+
+    // Gestion du Splash Screen Vidéo
+    function initSplashVideo() {
+      const splash = document.getElementById('videoSplash');
+      const video = document.getElementById('splashVideo');
+      const bar = document.getElementById('splashProgressBar');
+
+      if (!splash || !video) return;
+
+      // Suivi de progression de la vidéo
+      video.addEventListener('timeupdate', () => {
+        if (video.duration) {
+          const progress = (video.currentTime / video.duration) * 100;
+          if (bar) bar.style.width = `${progress}%`;
+        }
+      });
+
+      // Fermeture automatique à la fin de la lecture
+      video.addEventListener('ended', dismissSplashScreen);
+
+      // Fermeture de secours au bout de 9 secondes maximum
+      setTimeout(() => {
+        dismissSplashScreen();
+      }, 9000);
+    }
+
+    function dismissSplashScreen() {
+      const splash = document.getElementById('videoSplash');
+      if (splash && !splash.classList.contains('fade-out')) {
+        splash.classList.add('fade-out');
+        setTimeout(() => {
+          splash.style.display = 'none';
+        }, 700);
+      }
+    }
+
+    function replayIntroVideo() {
+      const splash = document.getElementById('videoSplash');
+      const video = document.getElementById('splashVideo');
+      const bar = document.getElementById('splashProgressBar');
+      if (splash && video) {
+        splash.style.display = 'flex';
+        splash.classList.remove('fade-out');
+        if (bar) bar.style.width = '0%';
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+    }
   </script>
 </body>
 </html>
