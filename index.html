@@ -176,7 +176,7 @@
     <!-- ========== VUE 1 : RÉSERVATION (ACCUEIL) ========== -->
     <section id="view-booking" class="space-y-4 md:space-y-0 md:grid md:grid-cols-12 md:gap-6 lg:gap-8 items-start">
       
-      <!-- Colonne Gauche (Desktop / Tablette) : Bannière + Infos Flotte -->
+      <!-- Colonne Gauche (Desktop / Tablette) : Bannière + Aperçu dynamique -->
       <div class="md:col-span-5 lg:col-span-5 space-y-4">
         <!-- Bannière Présentation Flotte & Yannis -->
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-tecGreen-800 via-tecGreen-700 to-emerald-900 text-white p-5 lg:p-6 shadow-xl">
@@ -196,34 +196,26 @@
           </div>
         </div>
 
-        <!-- Mini-Carte Visuelle Tuk-Tuk & Chauffeur Yannis (Visible en desktop) -->
-        <div class="hidden md:block bg-white rounded-3xl p-4 lg:p-5 shadow-sm border border-slate-200/80">
-          <div class="flex items-center space-x-3.5 mb-3">
-            <div class="w-16 h-16 rounded-2xl bg-amber-100 border-2 border-tecGreen-700 p-0.5 overflow-hidden shrink-0">
-              <img src="https://raw.githubusercontent.com/KaporalClems/Tec-tec-tuk-tuk/9465c5628eed294cb9aa68caf5a6300ec798665c/tuk-tuk%20tec-tec.jpeg" alt="Tuk-Tuk Cilaos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150/166534/ffffff?text=Yannis';">
-            </div>
-            <div>
-              <span class="inline-flex items-center space-x-1 bg-emerald-100 text-tecGreen-800 text-[10px] font-bold px-2 py-0.5 rounded-full mb-1">
-                <i data-lucide="shield-check" class="w-3 h-3"></i>
-                <span>Chauffeur Officiel</span>
-              </span>
-              <h3 class="font-extrabold text-slate-900 text-sm">Yannis en tenue Tec-Tec</h3>
-              <p class="text-xs text-slate-500">Conduite sécurisée et guidage dans le cirque</p>
-            </div>
+        <!-- Récapitulatif d'ambiance et engagement de service -->
+        <div class="hidden md:block bg-white rounded-3xl p-5 shadow-sm border border-slate-200/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Pourquoi réserver avec nous ?</span>
+            <span class="text-[10px] font-extrabold text-tecGreen-800 bg-emerald-100 px-2 py-0.5 rounded-full">100% Local</span>
           </div>
-          <p class="text-xs text-slate-600 bg-slate-50 p-3 rounded-2xl border border-slate-100 leading-relaxed">
-            "Je vous prends en charge directement à votre hébergement ou au parking pour vous déposer au pied des sentiers sans stress de stationnement."
-          </p>
-
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-semibold">
-            <span class="flex items-center space-x-1 text-emerald-700">
-              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
-              <span>Hub 100% Solaire</span>
-            </span>
-            <button onclick="changeTab('contact')" class="hover:text-tecGreen-800 underline">
-              Accès & Itinéraire
-            </button>
-          </div>
+          <ul class="text-xs text-slate-600 space-y-2">
+            <li class="flex items-center space-x-2">
+              <i data-lucide="check" class="w-4 h-4 text-tecGreen-600 shrink-0"></i>
+              <span>Prise en charge directe à votre hébergement ou au hub</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <i data-lucide="check" class="w-4 h-4 text-tecGreen-600 shrink-0"></i>
+              <span>Transport sécurisé avec Yannis en tenue officielle</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <i data-lucide="check" class="w-4 h-4 text-tecGreen-600 shrink-0"></i>
+              <span>Confirmation et contact direct via WhatsApp</span>
+            </li>
+          </ul>
         </div>
       </div>
 
